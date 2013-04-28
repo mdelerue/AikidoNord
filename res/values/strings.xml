@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Aikido Nord</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="api_prochain_stage_xml">http://127.0.0.1/prochain_stage.xml</string>
+    <string name="api_prochain_stage_json">http://127.0.0.1/prochain_stage.txt</string>
+
+</resources>

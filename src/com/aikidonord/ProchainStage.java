@@ -3,6 +3,7 @@ package com.aikidonord;
 
 import org.json.JSONObject;
 
+import com.aikidonord.display.DisplayStage;
 import com.aikidonord.metier.Stage;
 import com.aikidonord.parsers.ProchainStageParser;
 import com.aikidonord.utils.JSONRequest;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.view.Menu;
+import android.widget.LinearLayout;
+
 
 public class ProchainStage extends Activity {
 	
@@ -22,8 +25,8 @@ public class ProchainStage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_prochain_stage);
 		
+		setContentView(R.layout.activity_prochain_stage);
 		
 		this.mProgressDialog = ProgressDialog.show(this, "Chargement",
 				"Chargement",
@@ -39,11 +42,23 @@ public class ProchainStage extends Activity {
 	}
 	
 	
-		
+	/**
+	 * Mise en page du stage
+	 * @param stage le stage à mettre en page
+	 */
+	private void displayStage( Stage stage) {
+				
+		DisplayStage ds = new DisplayStage(this.getApplicationContext(), R.layout.stage,
+				stage,(LinearLayout)findViewById(R.id.linearLayoutProchainStage),
+				this);
+
+	}
+	
+			
 	
 	/**
 	 * Async
-	 * @author garth
+	 * @author Marc Delerue
 	 *
 	 */
 	 private class QueryForProchainStageTask extends AsyncTask<Object, Void, Stage> {
@@ -51,7 +66,7 @@ public class ProchainStage extends Activity {
 		 
 		 private ProgressDialog mProgressDialog;
 		 private Activity activity;
-		 private Stage stage;
+		 
 		 
 		 
 	     protected Stage doInBackground(Object... o) {
@@ -60,7 +75,7 @@ public class ProchainStage extends Activity {
 	         
 	         this.mProgressDialog = (ProgressDialog)o[0];
 	         this.activity = (Activity)o[1];
-	         this.stage = (Stage)o[2];
+	         
 	         
 	         
 	         
@@ -72,7 +87,10 @@ public class ProchainStage extends Activity {
 	     }
 
 
-	     
+	     /**
+	      * requêtage de l'API.
+	      * @return un JSONObject représentant la réponse de l'API
+	      */
 	     public JSONObject startQuerying() {
 
 	    	 
@@ -81,7 +99,6 @@ public class ProchainStage extends Activity {
 	 		String url = getResources().getString(
 	 				R.string.api_prochain_stage_json);
 	 				
-
 	 		JSONObject jo = jr.getJSONFromUrl(url);
 
 	 		return jo;
@@ -93,11 +110,15 @@ public class ProchainStage extends Activity {
 	         //setProgressPercent(progress[0]);
 	     }
 
+	     /**
+	      * Exécution à la fin du traitement
+	      */
 	     protected void onPostExecute(Stage stage) {
 	    	     	 
 	    	 this.mProgressDialog.dismiss();
 	    	 
-	    	 // mettre en page
+	    	 // mise en page
+	    	 ProchainStage.this.displayStage(stage);
 	    	 
 	    	 
 	     }

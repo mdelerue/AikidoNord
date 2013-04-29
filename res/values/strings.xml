@@ -6,6 +6,6 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="api_prochain_stage_xml">http://127.0.0.1/prochain_stage.xml</string>
-    <string name="api_prochain_stage_json">http://127.0.0.1/prochain_stage.txt</string>
+    <string name="api_prochain_stage_json">http://www.aikidonord.com/prochain_stage.json</string>
 
 </resources>

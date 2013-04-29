@@ -104,7 +104,7 @@ public class ProchainStageParser {
 			} // fin gestion lieu
 
 			// Tableau Animateur
-			JSONArray j_animateurs = json.getJSONArray(TAG_ANIMATEURS);
+			JSONArray j_animateurs = j_stage.has(TAG_ANIMATEURS) ? j_stage.getJSONArray(TAG_ANIMATEURS) : null;
 
 			if (j_animateurs != null) {
 				for (int i = 0; i < j_animateurs.length(); i++) {
@@ -135,7 +135,7 @@ public class ProchainStageParser {
 			} // fin tableau animateurs
 
 			// Tableau Jour
-			JSONArray j_jours = json.getJSONArray(TAG_JOURS);
+			JSONArray j_jours = j_stage.has(TAG_JOURS) ? j_stage.getJSONArray(TAG_JOURS) : null;
 
 			if (j_jours != null) {
 				for (int i = 0; i < j_jours.length(); i++) {
@@ -144,7 +144,7 @@ public class ProchainStageParser {
 					JSONObject j_jour = j_jours.getJSONObject(i);
 					
 					// on récupère la date
-					Date d = sdf.parse(j_jour.getString(TAG_JOURS));
+					Date d = sdf.parse(j_jour.getString(TAG_DATE));
 					
 					JSONArray j_horaires = j_jour.getJSONArray(TAG_HORAIRES);
 					

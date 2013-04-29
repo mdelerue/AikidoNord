@@ -7,6 +7,7 @@ import com.aikidonord.metier.Stage;
 import com.aikidonord.parsers.ProchainStageParser;
 import com.aikidonord.utils.JSONRequest;
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.view.Menu;
 public class ProchainStage extends Activity {
 	
 	protected ProgressDialog mProgressDialog;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,7 @@ public class ProchainStage extends Activity {
 	}
 	
 	
-	
-	
+		
 	
 	/**
 	 * Async
@@ -50,6 +51,7 @@ public class ProchainStage extends Activity {
 		 
 		 private ProgressDialog mProgressDialog;
 		 private Activity activity;
+		 private Stage stage;
 		 
 		 
 	     protected Stage doInBackground(Object... o) {
@@ -58,6 +60,7 @@ public class ProchainStage extends Activity {
 	         
 	         this.mProgressDialog = (ProgressDialog)o[0];
 	         this.activity = (Activity)o[1];
+	         this.stage = (Stage)o[2];
 	         
 	         
 	         
@@ -93,6 +96,10 @@ public class ProchainStage extends Activity {
 	     protected void onPostExecute(Stage stage) {
 	    	     	 
 	    	 this.mProgressDialog.dismiss();
+	    	 
+	    	 // mettre en page
+	    	 
+	    	 
 	     }
 	 }
 

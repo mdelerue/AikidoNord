@@ -1,4 +1,4 @@
-﻿{
+{
 	"stage" : {
 		"jours" : [
 			{ "date" : "2012-12-15",
@@ -22,7 +22,7 @@
 			"ville" : "Mouvaux"
 		},
 		"tarif" : "12€",
-		"type" : "Stage Fédéral"
+		"type" : "Stage Fédéral",
 		"animateurs" : [
 				{"nom" : "Jacques Bardet", "grade" : "6ème Dan"},
 				{"nom" : "Claude Pellerin", "grade" : "7ème Dan Aïkikaï"}

@@ -1,4 +1,4 @@
-"stages" : [
+{"stages" : [
 
 {
 	"stage" : {
@@ -55,7 +55,7 @@
 		"tarif" : "Gratuit",
 		"type" : "Stage Privé",
 		"animateurs" : [
-				{"nom" : "Toto", "grade" : "83ème Dan"},
+				{"nom" : "Toto", "grade" : "83ème Dan"}
 		],
 		"date" : "2013-01-15"
 		
@@ -92,3 +92,4 @@
 	
 }
 ]
+}

@@ -20,40 +20,19 @@ import android.widget.TextView;
 public class DisplayStage {
 
 	private Stage stage;
-	private LayoutInflater inflater;
-	private Context context;
-	private int resource;
 	String addrNavigation;
-	final Activity act;
+	private View view;
+	private Activity act;
 
 	
-	/**
-	 * Constructeur DisplayStage - Se chaarge de prendre un layout existant, de le rempli et de l'intégrer
-	 * dans un layout défini
-	 * @param context Le contexte général de l'application
-	 * @param resource l'id du layout à utiliser
-	 * @param stage le stage à afficher
-	 * @param root le layout dans lequel il faut insérer root
-	 * @param activite l'activité qui appelle le formatage
-	 */
-	public DisplayStage(Context context, int resource, Stage stage, LinearLayout root, Activity activite) {
+	
+	public DisplayStage(Stage stage, View view, Activity act) {
 		
-		this.resource = resource;
+		
 		this.stage = stage;
-		this.context = context;
-		this.act = activite;
-		
-		// On appelle l'inflate pour pouvoir récupérer la vue
-		this.inflater = (LayoutInflater) this.context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				
-		View view = inflater.inflate(this.resource, root, false);
-		
-		// appel du formatage
-		view = this.formatData(view);
+		this.view = view;
+		this.act = act;
 
-		// on balance la view complétée dans le layout cible 
-		root.addView(view);
 	}
 
 	/**
@@ -62,7 +41,7 @@ public class DisplayStage {
 	 * @param view
 	 * @return
 	 */
-	private View formatData(View view) {
+	public View formatData() {
 		
 		// le date format pour afficher la date
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/mm/yyyy",

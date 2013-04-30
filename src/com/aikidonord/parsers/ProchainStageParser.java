@@ -109,7 +109,7 @@ public class ProchainStageParser {
 			if (j_animateurs != null) {
 				for (int i = 0; i < j_animateurs.length(); i++) {
 
-					String[] tabA = new String[3];
+					String[] tabA = new String[2];
 
 					JSONObject j_animateur = j_animateurs.getJSONObject(i);
 

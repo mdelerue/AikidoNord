@@ -16,13 +16,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 
-public class ProchainStage extends Activity {
+public class ProchainStage extends FragmentActivity {
 	
 	protected ProgressDialog mProgressDialog;
+	protected ViewPager viewPager;
+	protected StageAdapter sAdapter; 
+	static private List<Stage> lstage;
 	
 
 	@Override
@@ -31,10 +46,13 @@ public class ProchainStage extends Activity {
 		
 		setContentView(R.layout.activity_prochain_stage);
 		
+		this.viewPager = (ViewPager)findViewById(R.id.pager);
+		
+		
 		this.mProgressDialog = ProgressDialog.show(this, "Chargement",
 				"Chargement",
 				true);
-		new QueryForProchainStageTask().execute(this.mProgressDialog, this);
+		new QueryForProchainStageTask().execute(this.mProgressDialog);
 	}
 
 	@Override
@@ -49,11 +67,18 @@ public class ProchainStage extends Activity {
 	 * Mise en page du stage
 	 * @param stage le stage à mettre en page
 	 */
-	private void displayStage( Stage stage) {
-				
+	private void displayStage( List<Stage> lstage) {
+		
+		/*
 		DisplayStage ds = new DisplayStage(this.getApplicationContext(), R.layout.stage,
 				stage,(LinearLayout)findViewById(R.id.linearLayoutProchainStage),
 				this);
+		*/
+		this.lstage = lstage;
+		
+		this.sAdapter = new StageAdapter(this.getSupportFragmentManager());
+		this.viewPager.setAdapter(sAdapter);
+		
 
 	}
 	
@@ -67,9 +92,7 @@ public class ProchainStage extends Activity {
 	 private class QueryForProchainStageTask extends AsyncTask<Object, Void, List<Stage> > {
 		 
 		 
-		 private ProgressDialog mProgressDialog;
-		 private Activity activity;
-		 
+		 private ProgressDialog mProgressDialog;		 
 		 
 		 
 	     protected List<Stage> doInBackground(Object... o) {
@@ -77,7 +100,7 @@ public class ProchainStage extends Activity {
 	    	 List<Stage> lstage = null;
 	         
 	         this.mProgressDialog = (ProgressDialog)o[0];
-	         this.activity = (Activity)o[1];
+	         
 	         
 	         
 	         
@@ -120,11 +143,95 @@ public class ProchainStage extends Activity {
 	    	     	 
 	    	 this.mProgressDialog.dismiss();
 	    	 
+	    	 
 	    	 // mise en page
-	    	 //ProchainStage.this.displayStage(stage);
+	    	 ProchainStage.this.displayStage(lstage);
 	    	 
 	    	 
 	     }
-	 }
+	 } // fin async
+	 
+	 
+	 
+	 /**
+	  * Adapter
+	  * @author garth
+	  *
+	  */
+	 public static class StageAdapter extends FragmentStatePagerAdapter {
+		 
+	        public StageAdapter(FragmentManager fragmentManager) {
+	            super(fragmentManager);
+	        }
+
+	        @Override
+	        public int getCount() {
+	            return lstage.size();
+	        }
+
+	        @Override
+	        public Fragment getItem(int position) {
+	            return ArrayListFragment.newInstance(position);
+	        }
+	    }
+
+	 	/**
+	 	 * ListFragment
+	 	 * @author garth
+	 	 *
+	 	 */
+	    public static class ArrayListFragment extends Fragment {
+	        int mNum;
+
+	        /**
+	         * Create a new instance of CountingFragment, providing "num"
+	         * as an argument.
+	         */
+	        static ArrayListFragment newInstance(int num) {
+	            ArrayListFragment f = new ArrayListFragment();
+
+	            // Supply num input as an argument.
+	            Bundle args = new Bundle();
+	            args.putInt("num", num);
+	            f.setArguments(args);
+
+	            return f;
+	        }
+
+	        /**
+	         * When creating, retrieve this instance's number from its arguments.
+	         */
+	        @Override
+	        public void onCreate(Bundle savedInstanceState) {
+	            super.onCreate(savedInstanceState);
+	            mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+	        }
+
+	        /**
+	         * The Fragment's UI is just a simple text view showing its
+	         * instance number.
+	         */
+	        @Override
+	        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                Bundle savedInstanceState) {
+	            View v = inflater.inflate(R.layout.stage, container, false);
+	            
+	            DisplayStage ds = new DisplayStage(lstage.get(mNum), v, this.getActivity());
+
+	            
+	            return ds.formatData();
+	        }
+
+	        @Override
+	        public void onActivityCreated(Bundle savedInstanceState) {
+	            super.onActivityCreated(savedInstanceState);
+	            /*
+	            setListAdapter(new ArrayAdapter<String>(getActivity(),
+	                    android.R.layout.simple_list_item_1, Cheeses.sCheeseStrings));
+	            */
+	        }
+
+	        
+	    }
 
 }

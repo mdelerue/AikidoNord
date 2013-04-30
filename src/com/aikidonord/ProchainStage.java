@@ -1,10 +1,13 @@
 package com.aikidonord;
 
 
+import java.util.List;
+
 import org.json.JSONObject;
 
 import com.aikidonord.display.DisplayStage;
 import com.aikidonord.metier.Stage;
+import com.aikidonord.parsers.ListeStageParser;
 import com.aikidonord.parsers.ProchainStageParser;
 import com.aikidonord.utils.JSONRequest;
 
@@ -61,7 +64,7 @@ public class ProchainStage extends Activity {
 	 * @author Marc Delerue
 	 *
 	 */
-	 private class QueryForProchainStageTask extends AsyncTask<Object, Void, Stage> {
+	 private class QueryForProchainStageTask extends AsyncTask<Object, Void, List<Stage> > {
 		 
 		 
 		 private ProgressDialog mProgressDialog;
@@ -69,20 +72,20 @@ public class ProchainStage extends Activity {
 		 
 		 
 		 
-	     protected Stage doInBackground(Object... o) {
+	     protected List<Stage> doInBackground(Object... o) {
 	    	 
-	    	 Stage stage = null;
+	    	 List<Stage> lstage = null;
 	         
 	         this.mProgressDialog = (ProgressDialog)o[0];
 	         this.activity = (Activity)o[1];
 	         
 	         
 	         
-	         
-	         ProchainStageParser psp = new ProchainStageParser(this.startQuerying());			
-	         stage = psp.parseObject();
+	         ListeStageParser lsp = new ListeStageParser(this.startQuerying());
+	         			
+	         lstage = lsp.getListeStage();
 
-	         return stage;
+	         return lstage;
 				
 	     }
 
@@ -113,12 +116,12 @@ public class ProchainStage extends Activity {
 	     /**
 	      * Exécution à la fin du traitement
 	      */
-	     protected void onPostExecute(Stage stage) {
+	     protected void onPostExecute(List<Stage> lstage) {
 	    	     	 
 	    	 this.mProgressDialog.dismiss();
 	    	 
 	    	 // mise en page
-	    	 ProchainStage.this.displayStage(stage);
+	    	 //ProchainStage.this.displayStage(stage);
 	    	 
 	    	 
 	     }

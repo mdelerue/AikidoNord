@@ -1,3 +1,5 @@
+"stages" : [
+
 {
 	"stage" : {
 		"jours" : [
@@ -32,4 +34,61 @@
 		
 	}
 	
+},
+
+{
+	"stage" : {
+		"jours" : [
+			{ "date" : "2013-01-15",
+				"horaires" : [
+					{"heureDebut" : "15h00", "heureFin" : "18h00"}
+				]
+			
+			}
+		],
+		"lieu" : {
+			"salle" : "Aikido 1",
+			"rue" : "rue de Cambrai",
+			"codepostal" : "59500",
+			"ville" : "Douai"
+		},
+		"tarif" : "Gratuit",
+		"type" : "Stage Privé",
+		"animateurs" : [
+				{"nom" : "Toto", "grade" : "83ème Dan"},
+		],
+		"date" : "2013-01-15"
+		
+	}
+	
+},
+
+{
+	"stage" : {
+		"jours" : [
+			{ "date" : "2013-02-02",
+				"horaires" : [
+					{"heureDebut" : "9h30", "heureFin" : "12h30", "description" : "Assistants et enseignants"},
+					{"heureDebut" : "15h00", "heureFin" : "18h00"}
+				]
+			
+			}
+		],
+		"lieu" : {
+			"salle" : "aikido 2",
+			"rue" : "rue nationale",
+			"codepostal" : "59000",
+			"ville" : "Lille"
+		},
+		"tarif" : "153€",
+		"animateurs" : [
+				{"nom" : "Titi", "grade" : "6ème Dan"},
+				{"nom" : "tutu"}
+		],
+		"description" : "lorem ipsum dolor sit amet 2, le retour de la vengeance",
+		"date" : "2013-02-02"
+		
+	}
+	
 }
+]

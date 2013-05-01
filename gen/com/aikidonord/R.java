@@ -22,14 +22,18 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int ic_menu_refresh=0x7f020001;
+        public static final int refresh=0x7f020001;
     }
     public static final class id {
         public static final int pager=0x7f080000;
-        public static final int reload=0x7f080007;
+        public static final int reload=0x7f08000b;
         public static final int tv_adresse=0x7f080006;
+        public static final int tv_animateurs=0x7f080008;
+        public static final int tv_animePar=0x7f080007;
         public static final int tv_date=0x7f080001;
         public static final int tv_description=0x7f080004;
+        public static final int tv_horaires=0x7f08000a;
+        public static final int tv_horairesLabel=0x7f080009;
         public static final int tv_salle=0x7f080005;
         public static final int tv_tarif=0x7f080003;
         public static final int tv_type=0x7f080002;
@@ -42,9 +46,11 @@ public final class R {
         public static final int prochain_stage=0x7f070000;
     }
     public static final class string {
-        public static final int api_prochain_stage_json=0x7f050003;
-        public static final int api_prochain_stage_xml=0x7f050002;
+        public static final int animePar=0x7f050002;
+        public static final int api_prochain_stage_json=0x7f050005;
+        public static final int api_prochain_stage_xml=0x7f050004;
         public static final int app_name=0x7f050000;
+        public static final int horaires=0x7f050003;
         public static final int reload=0x7f050001;
     }
     public static final class style {

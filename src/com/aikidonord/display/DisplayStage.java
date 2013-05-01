@@ -1,20 +1,20 @@
 package com.aikidonord.display;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 
 import com.aikidonord.R;
 import com.aikidonord.metier.Stage;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DisplayStage {
@@ -43,9 +43,13 @@ public class DisplayStage {
 	 */
 	public View formatData() {
 		
-		// le date format pour afficher la date
+		// les dateFormat pour afficher les date
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/mm/yyyy",
 				Locale.FRANCE);
+		SimpleDateFormat sdfCourt = new SimpleDateFormat("EEEE dd",
+				Locale.FRANCE);
+
+		
 
 		// date
 		((TextView) view.findViewById(R.id.tv_date)).setText(sdf.format(stage
@@ -102,6 +106,58 @@ public class DisplayStage {
 				return true;
 			}
         });
+		
+		// animateur
+		List<String[]> la = this.stage.getListeAnimateur();
+		String animateurs = "";
+		int cpt = 0;
+		int max = la.size();
+		if (la != null && !la.isEmpty()) {
+		
+			for (String[] tab : la) {
+				animateurs += tab[0] + (tab[1] != null ? " (" + tab[1] + ")" : "");
+
+				if (cpt < max) {
+					animateurs += "\n";
+				}
+				cpt++;
+			} // fin parcours liste
+			
+			((TextView)view.findViewById(R.id.tv_animateurs)).setText(animateurs);
+			
+			// fin si liste != null && !empty
+		} else {
+			((TextView)view.findViewById(R.id.tv_animePar)).setVisibility(View.GONE);
+			((TextView)view.findViewById(R.id.tv_animateurs)).setVisibility(View.GONE);
+		}
+		
+		
+		// horaires
+		LinkedHashMap<Date, List<String[]>> lh = this.stage.getHoraires();
+		String horaires = "";
+		
+		if (lh != null &&!lh.isEmpty()) {
+			
+			for (Entry<Date, List<String[]>> entry : lh.entrySet()) {
+				horaires += sdf.format(entry.getKey()) + "\n";
+				
+				
+				for (String[] tab : entry.getValue()) {
+					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + "\n";
+				}
+				
+			}
+			
+			((TextView)view.findViewById(R.id.tv_horaires)).setText(horaires);
+			
+		} else {
+			((TextView)view.findViewById(R.id.tv_horairesLabel)).setVisibility(View.GONE);
+			((TextView)view.findViewById(R.id.tv_horaires)).setVisibility(View.GONE);
+		}
+		
+		
+		
+		
 		
 		return view;
 	}

@@ -39,5 +39,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_salle"/>
-
+    
+    <TextView 
+		android:id="@+id/tv_animePar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_adresse"
+        android:text="@string/animePar"/>
+    
+    <TextView 
+		android:id="@+id/tv_animateurs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_animePar"/>
+    
+    <TextView 
+		android:id="@+id/tv_horairesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_animateurs"
+        android:text="@string/horaires"/>
+    
+    <TextView 
+		android:id="@+id/tv_horaires"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_horairesLabel"/>
+    
 </RelativeLayout>

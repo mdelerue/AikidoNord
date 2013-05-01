@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,20 +36,38 @@ public class ProchainStage extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_prochain_stage);
-
+		
 		this.viewPager = (ViewPager) findViewById(R.id.pager);
 
-		this.mProgressDialog = ProgressDialog.show(this, "Chargement",
+		// si on n'est pas dans le cas d'une restauration, on exécute la requête
+		if (savedInstanceState == null) {
+			this.mProgressDialog = ProgressDialog.show(this, "Chargement",
 				"Chargement", true);
-		new QueryForProchainStageTask().execute(this.mProgressDialog);
+			new QueryForProchainStageTask().execute(this.mProgressDialog);
+		}
 
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.prochain_stage, menu);
+		getMenuInflater().inflate(R.menu.prochain_stage, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+        // Selon l'id, on déclenche une action
+        switch (item.getItemId()) {
+           case R.id.reload:
+        	   this.mProgressDialog = ProgressDialog.show(this, "Chargement",
+       				"Chargement", true);
+       			new QueryForProchainStageTask().execute(this.mProgressDialog);
+       			return true;
+        }
+        
+        return false;
 	}
 
 	/**
@@ -75,6 +94,11 @@ public class ProchainStage extends FragmentActivity {
 	   this.displayStage(stage);
 	   
 	}
+	
+	@Override
+	  public Object onRetainCustomNonConfigurationInstance() {
+	    return lstage;
+	}
 
 	/**
 	 * Mise en page du stage
@@ -88,6 +112,7 @@ public class ProchainStage extends FragmentActivity {
 
 		this.sAdapter = new StageAdapter(this.getSupportFragmentManager());
 		this.viewPager.setAdapter(sAdapter);
+		//this.viewPager.setCurrentItem(indexStage);
 
 	}
 
@@ -217,6 +242,7 @@ public class ProchainStage extends FragmentActivity {
 
 			DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
 					this.getActivity());
+			//ProchainStage.indexStage = mNum;
 
 			return ds.formatData();
 		}

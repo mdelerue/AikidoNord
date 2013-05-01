@@ -12,7 +12,7 @@ import com.aikidonord.metier.Stage;
 public class ListeStageParser {
 
 	private JSONObject json;
-	private List<Stage> lstage;
+	private ArrayList<Stage> lstage;
 
 	// JSON Node names
 	private static final String TAG_STAGES = "stages";
@@ -60,7 +60,7 @@ public class ListeStageParser {
 	 * renvoi la liste des stages construite
 	 * @return
 	 */
-	public List<Stage> getListeStage() {
+	public ArrayList<Stage> getListeStage() {
 		return this.lstage;
 	}
 

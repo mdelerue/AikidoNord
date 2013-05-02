@@ -143,7 +143,7 @@ public class DisplayStage {
 				
 				
 				for (String[] tab : entry.getValue()) {
-					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + "\n";
+					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + (tab[2] != null ? " - " + tab[2] : "") + "\n";
 				}
 				
 			}

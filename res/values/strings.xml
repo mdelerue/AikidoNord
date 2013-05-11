@@ -7,7 +7,7 @@
     <string name="animePar">Animé par</string>
     <string name="horaires">Horaires</string>
     
-    <string name="api_prochain_stage_xml">http://127.0.0.1/prochain_stage.xml</string>
-    <string name="api_prochain_stage_json">http://www.aikidonord.com/prochain_stage.json</string>
+    <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
+    <string name="api_param_from">from</string>
 
 </resources>

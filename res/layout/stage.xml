@@ -66,4 +66,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_horairesLabel"/>
     
+    <ImageView
+        android:id="@+id/iv_affiche"
+        android:layout_width="75dp"
+    	android:layout_height="100dp"        
+        android:layout_below="@id/tv_horaires" />
+    
 </RelativeLayout>

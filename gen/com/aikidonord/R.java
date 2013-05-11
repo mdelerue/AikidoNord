@@ -25,8 +25,9 @@ public final class R {
         public static final int refresh=0x7f020001;
     }
     public static final class id {
+        public static final int iv_affiche=0x7f08000b;
         public static final int pager=0x7f080000;
-        public static final int reload=0x7f08000b;
+        public static final int reload=0x7f08000c;
         public static final int tv_adresse=0x7f080006;
         public static final int tv_animateurs=0x7f080008;
         public static final int tv_animePar=0x7f080007;
@@ -47,8 +48,8 @@ public final class R {
     }
     public static final class string {
         public static final int animePar=0x7f050002;
-        public static final int api_prochain_stage_json=0x7f050005;
-        public static final int api_prochain_stage_xml=0x7f050004;
+        public static final int api_param_from=0x7f050005;
+        public static final int api_prochain_stage_json=0x7f050004;
         public static final int app_name=0x7f050000;
         public static final int horaires=0x7f050003;
         public static final int reload=0x7f050001;

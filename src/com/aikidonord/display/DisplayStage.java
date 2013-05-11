@@ -10,11 +10,14 @@ import java.util.Map.Entry;
 
 import com.aikidonord.R;
 import com.aikidonord.metier.Stage;
+import com.aikidonord.utils.DrawableOperation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DisplayStage {
@@ -44,7 +47,7 @@ public class DisplayStage {
 	public View formatData() {
 		
 		// les dateFormat pour afficher les date
-		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/mm/yyyy",
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/MM/yyyy",
 				Locale.FRANCE);
 		SimpleDateFormat sdfCourt = new SimpleDateFormat("EEEE dd",
 				Locale.FRANCE);
@@ -52,8 +55,7 @@ public class DisplayStage {
 		
 
 		// date
-		((TextView) view.findViewById(R.id.tv_date)).setText(sdf.format(stage
-				.getDateDebut()));
+		((TextView) view.findViewById(R.id.tv_date)).setText(sdf.format(stage.getDateDebut()));
 
 		// type de stage
 		((TextView) view.findViewById(R.id.tv_type)).setText(stage.getType());
@@ -143,7 +145,7 @@ public class DisplayStage {
 				
 				
 				for (String[] tab : entry.getValue()) {
-					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + (tab[2] != null ? " - " + tab[2] : "") + "\n";
+					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + "\n";
 				}
 				
 			}
@@ -154,6 +156,19 @@ public class DisplayStage {
 			((TextView)view.findViewById(R.id.tv_horairesLabel)).setVisibility(View.GONE);
 			((TextView)view.findViewById(R.id.tv_horaires)).setVisibility(View.GONE);
 		}
+		
+		// image 
+		if (this.stage.getImg() != null && !this.stage.getImg().equals("")) {
+			((ImageView)view.findViewById(R.id.iv_affiche))
+				.setImageBitmap(DrawableOperation.getBitmapFromStorage(this.stage.getId(),
+						this.stage.getDateDebut(),
+						this.act.getApplicationContext()));
+		} else {
+			((ImageView)view.findViewById(R.id.iv_affiche)).setVisibility(View.GONE);
+		}
+		
+		
+		
 		
 		
 		

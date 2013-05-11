@@ -19,6 +19,8 @@ public class Stage implements Parcelable {
 	private String tarif;
 	private String type;
 	private String description;
+	private String img = "";;
+	private String id;
 
 	// map lieu peut contenir les clés "salle", "rue", "codepostal", "ville"
 	private HashMap<String, String> mapLieu = new HashMap<String, String>();
@@ -163,6 +165,36 @@ public class Stage implements Parcelable {
 	 */
 	public void setMapLieu(HashMap<String, String> mapLieu) {
 		this.mapLieu = mapLieu;
+	}
+	
+	
+
+	/**
+	 * @return the img
+	 */
+	public String getImg() {
+		return img;
+	}
+
+	/**
+	 * @param img the img to set
+	 */
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override

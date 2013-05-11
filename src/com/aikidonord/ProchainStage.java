@@ -1,18 +1,24 @@
 package com.aikidonord;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONObject;
 
 import com.aikidonord.display.DisplayStage;
 import com.aikidonord.metier.Stage;
 import com.aikidonord.parsers.ListeStageParser;
+import com.aikidonord.utils.DrawableOperation;
 import com.aikidonord.utils.JSONRequest;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -43,7 +49,7 @@ public class ProchainStage extends FragmentActivity {
 		if (savedInstanceState == null) {
 			this.mProgressDialog = ProgressDialog.show(this, "Chargement",
 				"Chargement", true);
-			new QueryForProchainStageTask().execute(this.mProgressDialog);
+			new QueryForProchainStageTask().execute(this.mProgressDialog, this);
 		}
 
 	}
@@ -63,7 +69,7 @@ public class ProchainStage extends FragmentActivity {
            case R.id.reload:
         	   this.mProgressDialog = ProgressDialog.show(this, "Chargement",
        				"Chargement", true);
-       			new QueryForProchainStageTask().execute(this.mProgressDialog);
+       			new QueryForProchainStageTask().execute(this.mProgressDialog, this);
        			return true;
         }
         
@@ -103,8 +109,7 @@ public class ProchainStage extends FragmentActivity {
 	/**
 	 * Mise en page du stage
 	 * 
-	 * @param stage
-	 *            le stage à mettre en page
+	 * @param stage le stage à mettre en page
 	 */
 	private void displayStage(ArrayList<Stage> lstage) {
 
@@ -126,16 +131,34 @@ public class ProchainStage extends FragmentActivity {
 			AsyncTask<Object, Void, ArrayList<Stage>> {
 
 		private ProgressDialog mProgressDialog;
+		private Activity act;
 
 		protected ArrayList<Stage> doInBackground(Object... o) {
 
 			ArrayList<Stage> lstage = null;
 
 			this.mProgressDialog = (ProgressDialog) o[0];
+			this.act = (Activity) o[1];
 
 			ListeStageParser lsp = new ListeStageParser(this.startQuerying());
 
 			lstage = lsp.getListeStage();
+			
+			for (Stage s : lstage) {
+				// url de l'image
+				String src = s.getImg();
+				
+				if (src != null &&!src.equals("")) {
+				
+					// on tente de la récupérer dans le stockage
+					Bitmap bmp = DrawableOperation.getBitmapFromStorage(s.getId(), s.getDateDebut(), this.act.getApplicationContext() );
+				
+					if (bmp == null) {
+						// si ce n'est pas sur le disque, on l'écrit
+						DrawableOperation.saveThumbnailOnStorage(src, s.getId(), s.getDateDebut(), this.act.getApplicationContext());
+					}
+				}
+			}
 
 			return lstage;
 
@@ -152,8 +175,11 @@ public class ProchainStage extends FragmentActivity {
 
 			String url = getResources().getString(
 					R.string.api_prochain_stage_json);
-
-			JSONObject jo = jr.getJSONFromUrl(url);
+			String from = getResources().getString(R.string.api_param_from);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+			from += "=" + sdf.format(new Date());
+			
+			JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
 
 			return jo;
 
@@ -239,6 +265,7 @@ public class ProchainStage extends FragmentActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View v = inflater.inflate(R.layout.stage, container, false);
+			
 
 			DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
 					this.getActivity());

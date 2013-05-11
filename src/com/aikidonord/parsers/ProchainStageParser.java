@@ -8,7 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+
 import com.aikidonord.metier.Stage;
+import com.aikidonord.utils.DrawableOperation;
 
 public class ProchainStageParser {
 
@@ -32,8 +35,11 @@ public class ProchainStageParser {
 	private static final String TAG_ANIMATEURS = "animateurs";
 	private static final String TAG_NOM = "nom";
 	private static final String TAG_GRADE = "grade";
+	private static final String TAG_IMG = "img";
+	private static final String TAG_ID = "id";
+	
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd", Locale.FRANCE);
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
 	
 	public ProchainStageParser(JSONObject json) {
 
@@ -66,8 +72,18 @@ public class ProchainStageParser {
 				this.stage.setTarif(j_stage.getString(TAG_TARIF));
 			}
 			
+			// gestion img
+			if (j_stage.has(TAG_IMG)) {
+				this.stage.setImg(j_stage.getString(TAG_IMG));
+			}
+			
+			// gestion id
+			this.stage.setId(j_stage.getString(TAG_ID));
+			
+			
 			// gestion date début
 			this.stage.setDateDebut(sdf.parse(j_stage.getString(TAG_DATE)));
+			
 
 			// gestion lieu
 			if (j_stage.has(TAG_LIEU)) {

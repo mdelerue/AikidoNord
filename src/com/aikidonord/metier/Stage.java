@@ -30,7 +30,7 @@ public class Stage implements Parcelable {
 	/*
 	 * map contenant les horaires les dates des jours en clé, la liste des
 	 * horaire des jours en valeurs. chaque valeur est une liste contenant les
-	 * horaires dans un tableau 0 -> heureDebut, 1 -> heureFin, 2 -> description
+	 * horaires dans un tableau 0 -> heure, 1 -> description
 	 * spécifique à l'horaire
 	 */
 	private LinkedHashMap<Date, List<String[]>> horaires = new LinkedHashMap<Date, List<String[]>>();

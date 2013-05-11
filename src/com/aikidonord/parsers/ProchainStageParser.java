@@ -20,8 +20,7 @@ public class ProchainStageParser {
 	private static final String TAG_JOURS = "jours";
 	private static final String TAG_DATE = "date";
 	private static final String TAG_HORAIRES = "horaires";
-	private static final String TAG_HEUREDEBUT = "heureDebut";
-	private static final String TAG_HEUREFIN = "heureFin";
+	private static final String TAG_HEURE = "heure";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_LIEU = "lieu";
 	private static final String TAG_SALLE = "salle";
@@ -153,16 +152,16 @@ public class ProchainStageParser {
 						
 						JSONObject h = j_horaires.getJSONObject(j);
 						
-						String[] tab = new String[3];
+						String[] tab = new String[2];
 						
 						// on remplit le tableau
-						tab[0] = h.getString(TAG_HEUREDEBUT);
-						tab[1] = h.getString(TAG_HEUREFIN);
+						tab[0] = h.getString(TAG_HEURE);
+						
 						
 						if (h.has(TAG_DESCRIPTION)) {
-							tab[2] = h.getString(TAG_DESCRIPTION);
+							tab[1] = h.getString(TAG_DESCRIPTION);
 						} else {
-							tab[2] = null;
+							tab[1] = null;
 						}
 						
 						// on ajoute l'horaire à l'objet Stage

@@ -3,7 +3,6 @@ package com.aikidonord;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONObject;
@@ -106,11 +105,10 @@ public class ProchainStage extends FragmentActivity {
 	    return lstage;
 	}
 
-	/**
-	 * Mise en page du stage
-	 * 
-	 * @param stage le stage à mettre en page
-	 */
+    /**
+     * Mise en page de la liste de stage
+     * @param lstage
+     */
 	private void displayStage(ArrayList<Stage> lstage) {
 
 		this.lstage = lstage;

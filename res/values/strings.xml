@@ -2,12 +2,20 @@
 <resources>
 
     <string name="app_name">Aikido Nord</string>
-    
     <string name="reload">Recharger</string>
     <string name="animePar">Animé par</string>
     <string name="horaires">Horaires</string>
     
+    <string name="app_label">Stage ligue Flandre Artois</string>
+    <string name="saison_label">Saison</string>
+    
     <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
     <string name="api_param_from">from</string>
+    <string name="api_param_anim">idanim</string>
+    <string name="api_param_type">type</string>
+    <string name="api_animateurs_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getAnimateur.php</string>
+    
+    
+    
 
 </resources>

@@ -1,5 +1,7 @@
 package com.aikidonord;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProchainStage extends FragmentActivity {
+public class ProchainsStages extends FragmentActivity {
 
 	static private ArrayList<Stage> lstage;
 	protected ProgressDialog mProgressDialog;
@@ -204,7 +206,7 @@ public class ProchainStage extends FragmentActivity {
 
 			DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
 					this.getActivity());
-			//ProchainStage.indexStage = mNum;
+			//ProchainsStages.indexStage = mNum;
 
 			return ds.formatData();
 		}
@@ -246,6 +248,7 @@ public class ProchainStage extends FragmentActivity {
 			ListeStageParser lsp = new ListeStageParser(this.startQuerying());
 
 			lstage = lsp.getListeStage();
+
 
             System.out.println("AIKIDONORD : " + lstage);
             System.out.println("AIKIDONORD : " + lstage.size());
@@ -290,6 +293,13 @@ public class ProchainStage extends FragmentActivity {
             if (type != null) {
                 if (type.equals("intervenant")) {
                     paramSupplementaire = "&" + getResources().getString(R.string.api_param_anim) + "=" + this.data;
+                } else if (type.equals("type")) {
+                    try {
+                    paramSupplementaire = "&" + getResources().getString(R.string.api_param_type) + "=" + URLEncoder.encode(this.data, "UTF-8");
+                    } catch (UnsupportedEncodingException _uee) {
+
+                    }
+
                 }
             }
 
@@ -311,7 +321,7 @@ public class ProchainStage extends FragmentActivity {
 			this.mProgressDialog.dismiss();
 
 			// mise en page
-			ProchainStage.this.displayStage(lstage);
+			ProchainsStages.this.displayStage(lstage);
 
 		}
 	} // fin async

@@ -54,7 +54,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:contentDescription="Intervenant"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/icone_intervenant"
             android:onClick="launch_intervenant"
             android:clickable="true" />
 
@@ -65,7 +65,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:contentDescription="Theme"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/icone_type"
+            android:onClick="launch_type"
+            android:clickable="true"/>
 
         <ImageView
                 android:id="@+id/iv_choix_lieux_main"

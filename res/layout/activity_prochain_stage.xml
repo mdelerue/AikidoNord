@@ -17,8 +17,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:padding="@dimen/padding_listeanimateur"
-            android:textSize="@dimen/taille_police_listeanimateur"
+            android:padding="@dimen/padding_liste"
+            android:textSize="@dimen/taille_police_liste"
             android:text="Pas de résultat"
             android:gravity="center_horizontal"
             android:visibility="gone"/>

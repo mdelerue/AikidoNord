@@ -24,18 +24,18 @@ import com.aikidonord.R;
  *         http://blog.sachinshah.name/?p=62
  */
 
-public class IntervenantAdapter extends BaseAdapter {
+public class TypeAdapter extends BaseAdapter {
 
     // store the context (as an inflated layout)
     private LayoutInflater inflater;
     // store the resource (searchitem_intervenant.xml)
     private int resource;
 
-    private ArrayList<Animateur> data;
+    private ArrayList<String> data;
     private Activity parentActivity;
     private Context context;
 
-    public IntervenantAdapter(Context context, int resource, ArrayList<Animateur> data, Activity parentActivity) {
+    public TypeAdapter(Context context, int resource, ArrayList<String> data, Activity parentActivity) {
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.resource = resource;
@@ -55,13 +55,13 @@ public class IntervenantAdapter extends BaseAdapter {
     /**
      * Return an object of the data set
      */
-    public Animateur getItem(int arg0) {
+    public String getItem(int arg0) {
         return this.data.get(arg0);
     }
 
     public long getItemId(int position) {
         // temp
-        return this.data.get(position).getId();
+        return Integer.getInteger(this.data.get(position));
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -71,8 +71,8 @@ public class IntervenantAdapter extends BaseAdapter {
         if (convertView == null) {
             view = this.inflater.inflate(resource, parent, false);
             ViewHolder holder = new ViewHolder();
-            holder.tv_nom = (TextView) view
-                    .findViewById(R.id.searchList_animateurNom);
+            holder.tv_type = (TextView) view
+                    .findViewById(R.id.searchList_type);
 
             view.setTag(holder);
 
@@ -98,16 +98,21 @@ public class IntervenantAdapter extends BaseAdapter {
 
         ViewHolder holder = (ViewHolder) view.getTag();
         // pull out the object
-        Animateur anim = this.data.get(position);
+        String type = this.data.get(position);
 
         // Nom
-        TextView tv = holder.tv_nom;
+        TextView tv = holder.tv_type;
 
         // set the value
-        String texte = anim.getNom() + " " + (anim.getPrenom() != null ? anim.getPrenom() : "");
+        // on met la première lettre en majuscule
+        char[] stringArray = type.toCharArray();
+        stringArray[0] = Character.toUpperCase(stringArray[0]);
+        type = new String(stringArray);
+
+        String texte = type;
         tv.setText(texte);
 
-        final Animateur animOC = anim;
+        final String typeOC = type;
 
         view.setOnClickListener(new View.OnClickListener() {
 
@@ -116,8 +121,8 @@ public class IntervenantAdapter extends BaseAdapter {
                 Intent i = new Intent(parentActivity, ProchainsStages.class);
                 // données à envoyer à l'activité
                 Bundle b = new Bundle();
-                b.putString("type", "intervenant");
-                b.putString("data", String.valueOf(animOC.getId()));
+                b.putString("type", "type");
+                b.putString("data", String.valueOf(typeOC));
                 i.putExtras(b);
                 parentActivity.startActivity(i);
             }
@@ -135,7 +140,7 @@ public class IntervenantAdapter extends BaseAdapter {
     // ViewHolder Class
     static class ViewHolder {
 
-        TextView tv_nom;
+        TextView tv_type;
 
 
     }

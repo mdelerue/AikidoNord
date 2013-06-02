@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import com.aikidonord.display.IntervenantAdapter;
+import com.aikidonord.display.TypeAdapter;
 import com.aikidonord.metier.Animateur;
 import com.aikidonord.utils.JSONRequest;
 import org.json.JSONArray;
@@ -23,17 +24,17 @@ import java.util.Locale;
  * Date: 25/05/13
  * Time: 16:43
  */
-public class Intervenant extends ListActivity {
+public class Type extends ListActivity {
     ProgressDialog mProgressDialog;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_intervenant);
+        setContentView(R.layout.activity_type);
 
         this.mProgressDialog = ProgressDialog.show(this, "Chargement",
                 "Chargement",true);
-                new QueryForAnimateurTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+        new QueryForTypeTask().execute(this.mProgressDialog, this, this.getApplicationContext());
     }
 
 
@@ -42,24 +43,24 @@ public class Intervenant extends ListActivity {
      *
      * @author Marc Delerue
      */
-    private class QueryForAnimateurTask extends
-            AsyncTask<Object, Void, ArrayList<Animateur>> {
+    private class QueryForTypeTask extends
+            AsyncTask<Object, Void, ArrayList<String>> {
 
         private ProgressDialog mProgressDialog;
         private Activity act;
         private Context context;
 
-        protected ArrayList<Animateur> doInBackground(Object... o) {
+        protected ArrayList<String> doInBackground(Object... o) {
 
 
             this.mProgressDialog = (ProgressDialog) o[0];
             this.act = (Activity) o[1];
             this.context = (Context)o[2];
 
-            ArrayList<Animateur> listeIntervenant = this.parseJSON(this.startQuerying());
+            ArrayList<String> listeType = this.parseJSON(this.startQuerying());
 
 
-            return listeIntervenant;
+            return listeType;
 
         }
 
@@ -78,7 +79,7 @@ public class Intervenant extends ListActivity {
             from += "=" + sdf.format(new Date());
 
             String url = getResources().getString(
-                    R.string.api_animateurs_json);
+                    R.string.api_types_json);
 
 
             JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
@@ -92,18 +93,18 @@ public class Intervenant extends ListActivity {
          * @param jsonObject
          * @return
          */
-        public ArrayList<Animateur> parseJSON(JSONObject jsonObject) {
+        public ArrayList<String> parseJSON(JSONObject jsonObject) {
 
-            ArrayList<Animateur> l =new ArrayList<Animateur>();
+            ArrayList<String> l = new ArrayList<String>();
 
             try {
-                JSONArray array = jsonObject.getJSONArray("animateurs");
+                JSONArray array = jsonObject.getJSONArray("types");
 
                 if (array != null) {
 
                     for (int i=0; i<array.length(); i++) {
-                        JSONObject o = array.getJSONObject(i);
-                        l.add(new Animateur(o.getInt("id"), o.getString("nom"), null, null));
+                        String type = array.getString(i);
+                        l.add(type);
 
                     }    // fin parcours JSONArray
 
@@ -123,10 +124,10 @@ public class Intervenant extends ListActivity {
         /**
          * Exécution à la fin du traitement
          */
-        protected void onPostExecute(ArrayList<Animateur> lInter) {
+        protected void onPostExecute(ArrayList<String> lType) {
 
-             // Create items for the ListView
-            IntervenantAdapter adapter = new IntervenantAdapter(this.context, R.layout.searchitem_intervenant, lInter, this.act);
+            // Create items for the ListView
+            TypeAdapter adapter = new TypeAdapter(this.context, R.layout.searchitem_type, lType, this.act);
             // specify the list adaptor
             setListAdapter(adapter);
             this.mProgressDialog.dismiss();

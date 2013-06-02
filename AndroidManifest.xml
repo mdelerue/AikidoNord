@@ -29,13 +29,18 @@
         </activity>
 
         <activity
-            android:name="com.aikidonord.ProchainStage"
+            android:name=".ProchainsStages"
             android:theme="@android:style/Theme.NoTitleBar" >
             
         </activity>
 
         <activity
                 android:name="com.aikidonord.Intervenant"
+                android:theme="@android:style/Theme.NoTitleBar" >
+
+        </activity>
+        <activity
+                android:name="com.aikidonord.Type"
                 android:theme="@android:style/Theme.NoTitleBar" >
 
         </activity>

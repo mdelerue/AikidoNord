@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import android.widget.TextView;
 import org.json.JSONObject;
 
 import com.aikidonord.display.DisplayStage;
@@ -31,10 +32,10 @@ import android.view.ViewGroup;
 
 public class ProchainStage extends FragmentActivity {
 
+	static private ArrayList<Stage> lstage;
 	protected ProgressDialog mProgressDialog;
 	protected ViewPager viewPager;
 	protected StageAdapter sAdapter;
-	static private ArrayList<Stage> lstage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +45,23 @@ public class ProchainStage extends FragmentActivity {
 		
 		this.viewPager = (ViewPager) findViewById(R.id.pager);
 
-		// si on n'est pas dans le cas d'une restauration, on exécute la requête
-		if (savedInstanceState == null) {
-			this.mProgressDialog = ProgressDialog.show(this, "Chargement",
-				"Chargement", true);
-			new QueryForProchainStageTask().execute(this.mProgressDialog, this);
-		}
+        Bundle b = this.getIntent().getExtras();
+        if (b != null) {
+            this.mProgressDialog = ProgressDialog.show(this, "Chargement",
+                    "Chargement", true);
+            // si l'ouverture de l'activité vient d'un Intent (ce qui devrait toujours être le cas)
+            String type = b.getString("type");
+            String data = b.getString("data");
 
-	}
-	
-	
+            new QueryForProchainStageTask().execute(this.mProgressDialog, this, type, data);
+        }  else if (savedInstanceState == null) {
+            this.mProgressDialog = ProgressDialog.show(this, "Chargement",
+                    "Chargement", true);
+		    // si on n'est pas dans le cas d'une restauration, on exécute la requête
+		    // requête par défaut
+		    new QueryForProchainStageTask().execute(this.mProgressDialog, this, null, null);
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,98 +121,27 @@ public class ProchainStage extends FragmentActivity {
 
 		this.lstage = lstage;
 
-		this.sAdapter = new StageAdapter(this.getSupportFragmentManager());
-		this.viewPager.setAdapter(sAdapter);
-		//this.viewPager.setCurrentItem(indexStage);
+        if (lstage.size() > 0) {
+            // s'il y a des résultats
+
+            ((ViewPager)findViewById(R.id.pager)).setVisibility(View.VISIBLE);
+            ((TextView)findViewById(R.id.tv_noresult)).setVisibility(View.GONE);
+
+		    this.sAdapter = new StageAdapter(this.getSupportFragmentManager());
+		    this.viewPager.setAdapter(sAdapter);
+
+        } else {
+            ((ViewPager)findViewById(R.id.pager)).setVisibility(View.GONE);
+            ((TextView)findViewById(R.id.tv_noresult)).setVisibility(View.VISIBLE);
+        }
 
 	}
 
 	/**
-	 * Async
-	 * 
-	 * @author Marc Delerue
-	 * 
-	 */
-	private class QueryForProchainStageTask extends
-			AsyncTask<Object, Void, ArrayList<Stage>> {
-
-		private ProgressDialog mProgressDialog;
-		private Activity act;
-
-		protected ArrayList<Stage> doInBackground(Object... o) {
-
-			ArrayList<Stage> lstage = null;
-
-			this.mProgressDialog = (ProgressDialog) o[0];
-			this.act = (Activity) o[1];
-
-			ListeStageParser lsp = new ListeStageParser(this.startQuerying());
-
-			lstage = lsp.getListeStage();
-			
-			for (Stage s : lstage) {
-				// url de l'image
-				String src = s.getImg();
-				
-				if (src != null &&!src.equals("")) {
-				
-					// on tente de la récupérer dans le stockage
-					Bitmap bmp = DrawableOperation.getBitmapFromStorage(s.getId(), s.getDateDebut(), this.act.getApplicationContext() );
-				
-					if (bmp == null) {
-						// si ce n'est pas sur le disque, on l'écrit
-						DrawableOperation.saveThumbnailOnStorage(src, s.getId(), s.getDateDebut(), this.act.getApplicationContext());
-					}
-				}
-			}
-
-			return lstage;
-
-		}
-
-		/**
-		 * requêtage de l'API.
-		 * 
-		 * @return un JSONObject représentant la réponse de l'API
-		 */
-		public JSONObject startQuerying() {
-
-			JSONRequest jr = new JSONRequest();
-
-			String url = getResources().getString(
-					R.string.api_prochain_stage_json);
-			String from = getResources().getString(R.string.api_param_from);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
-			from += "=" + sdf.format(new Date());
-			
-			JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
-
-			return jo;
-
-		}
-
-		protected void onProgressUpdate(Integer... progress) {
-			// setProgressPercent(progress[0]);
-		}
-
-		/**
-		 * Exécution à la fin du traitement
-		 */
-		protected void onPostExecute(ArrayList<Stage> lstage) {
-
-			this.mProgressDialog.dismiss();
-
-			// mise en page
-			ProchainStage.this.displayStage(lstage);
-
-		}
-	} // fin async
-
-	/**
 	 * Adapter
-	 * 
+	 *
 	 * @author Marc Delerue
-	 * 
+	 *
 	 */
 	public static class StageAdapter extends FragmentStatePagerAdapter {
 
@@ -225,9 +162,9 @@ public class ProchainStage extends FragmentActivity {
 
 	/**
 	 * StageFragment
-	 * 
+	 *
 	 * @author garth
-	 * 
+	 *
 	 */
 	public static class StageFragment extends Fragment {
 		int mNum;
@@ -263,7 +200,7 @@ public class ProchainStage extends FragmentActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View v = inflater.inflate(R.layout.stage, container, false);
-			
+
 
 			DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
 					this.getActivity());
@@ -278,5 +215,105 @@ public class ProchainStage extends FragmentActivity {
 		}
 
 	} // fin StageFragment
+
+	/**
+	 * Async
+	 *
+	 * @author Marc Delerue
+	 *
+	 */
+	private class QueryForProchainStageTask extends
+			AsyncTask<Object, Void, ArrayList<Stage>> {
+
+		private ProgressDialog mProgressDialog;
+		private Activity act;
+        // type de recherche
+        private String type;
+        // data associée
+        private String data;
+
+		protected ArrayList<Stage> doInBackground(Object... o) {
+
+			ArrayList<Stage> lstage = null;
+
+			this.mProgressDialog = (ProgressDialog) o[0];
+			this.act = (Activity) o[1];
+            this.type = (String) o[2];
+            this.data = (String) o[3];
+
+
+
+			ListeStageParser lsp = new ListeStageParser(this.startQuerying());
+
+			lstage = lsp.getListeStage();
+
+            System.out.println("AIKIDONORD : " + lstage);
+            System.out.println("AIKIDONORD : " + lstage.size());
+            System.out.println("AIKIDONORD : data : " + this.data);
+
+			for (Stage s : lstage) {
+				// url de l'image
+				String src = s.getImg();
+
+				if (src != null &&!src.equals("")) {
+
+					// on tente de la récupérer dans le stockage
+					Bitmap bmp = DrawableOperation.getBitmapFromStorage(s.getId(), s.getDateDebut(), this.act.getApplicationContext() );
+
+					if (bmp == null) {
+						// si ce n'est pas sur le disque, on l'écrit
+						DrawableOperation.saveThumbnailOnStorage(src, s.getId(), s.getDateDebut(), this.act.getApplicationContext());
+					}
+				}
+			}
+
+			return lstage;
+
+		}
+
+		/**
+		 * requêtage de l'API.
+		 *
+		 * @return un JSONObject représentant la réponse de l'API
+		 */
+		public JSONObject startQuerying() {
+
+			JSONRequest jr = new JSONRequest();
+
+			String url = getResources().getString(
+					R.string.api_prochain_stage_json);
+			String from = getResources().getString(R.string.api_param_from);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+			from += "=" + sdf.format(new Date());
+
+            String paramSupplementaire = "";
+            if (type != null) {
+                if (type.equals("intervenant")) {
+                    paramSupplementaire = "&" + getResources().getString(R.string.api_param_anim) + "=" + this.data;
+                }
+            }
+
+			JSONObject jo = jr.getJSONFromUrl(url + "?" + from + paramSupplementaire);
+
+			return jo;
+
+		}
+
+		protected void onProgressUpdate(Integer... progress) {
+			// setProgressPercent(progress[0]);
+		}
+
+		/**
+		 * Exécution à la fin du traitement
+		 */
+		protected void onPostExecute(ArrayList<Stage> lstage) {
+
+			this.mProgressDialog.dismiss();
+
+			// mise en page
+			ProchainStage.this.displayStage(lstage);
+
+		}
+	} // fin async
 
 }

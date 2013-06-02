@@ -40,7 +40,6 @@ public class DisplayStage {
 	/**
 	 * Formatage du stage
 	 * Utilise le layout défini dans vue pour afficher les données
-	 * @param view
 	 * @return
 	 */
 	public View formatData() {

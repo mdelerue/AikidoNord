@@ -10,57 +10,64 @@ import com.aikidonord.metier.Stage;
 
 public class ListeStageParser {
 
-	private JSONObject json;
-	private ArrayList<Stage> lstage;
+    private JSONObject json;
+    private ArrayList<Stage> lstage;
 
-	// JSON Node names
-	private static final String TAG_STAGES = "stages";
+    // JSON Node names
+    private static final String TAG_STAGES = "stages";
 
-	public ListeStageParser(JSONObject json) {
+    public ListeStageParser(JSONObject json) {
 
-		this.json = json;
-		this.lstage = new ArrayList<Stage>();
-		
-		try {
-			this.ParseObject();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        this.json = json;
+        this.lstage = new ArrayList<Stage>();
 
-	}
 
-	/**
-	 * Parse l'objet JSON et appelle un ProchainStageParser pour chaque stage
-	 * @throws JSONException
-	 */
-	private void ParseObject() throws JSONException {
+        if (this.json != null) {
+        // si le retour json != null
+            try {
+                this.ParseObject();
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-		JSONArray stages = this.json.has(TAG_STAGES) ? this.json
-				.getJSONArray(TAG_STAGES) : null;
+        }
+    }
 
-		if (stages != null) {
+    /**
+     * Parse l'objet JSON et appelle un ProchainStageParser pour chaque stage
+     *
+     * @throws JSONException
+     */
+    private void ParseObject() throws JSONException {
 
-			for (int i = 0; i < stages.length(); i++) {
+        System.out.println("AIKIDONORD : " + (this.json != null ? "OK" : "NULL"));
+        JSONArray stages = this.json.has(TAG_STAGES) ? this.json
+                .getJSONArray(TAG_STAGES) : null;
 
-				JSONObject stage = stages.getJSONObject(i);
+        if (stages != null) {
 
-				ProchainStageParser psp = new ProchainStageParser(stage);
+            for (int i = 0; i < stages.length(); i++) {
 
-				this.lstage.add(psp.parseObject());
+                JSONObject stage = stages.getJSONObject(i);
 
-			} // fin parcours tableau
+                ProchainStageParser psp = new ProchainStageParser(stage);
 
-		} // fin test si != null
+                this.lstage.add(psp.parseObject());
 
-	}
-	
-	/**
-	 * renvoi la liste des stages construite
-	 * @return
-	 */
-	public ArrayList<Stage> getListeStage() {
-		return this.lstage;
-	}
+            } // fin parcours tableau
+
+        } // fin test si != null
+
+    }
+
+    /**
+     * renvoi la liste des stages construite
+     *
+     * @return
+     */
+    public ArrayList<Stage> getListeStage() {
+        return this.lstage;
+    }
 
 }

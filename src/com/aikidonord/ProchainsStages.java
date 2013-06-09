@@ -300,9 +300,17 @@ public class ProchainsStages extends FragmentActivity {
 
                     }
 
+                }  else if (type.equals("lieu")) {
+                    try {
+                        paramSupplementaire = "&" + getResources().getString(R.string.api_param_lieu) + "=" + URLEncoder.encode(this.data, "UTF-8");
+                    } catch (UnsupportedEncodingException _uee) {
+
+                    }
+
                 }
             }
 
+            System.out.println("AIKODONORD : " + url + "?" + from + paramSupplementaire);
 			JSONObject jo = jr.getJSONFromUrl(url + "?" + from + paramSupplementaire);
 
 			return jo;

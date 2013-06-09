@@ -63,4 +63,12 @@ public class AikidoNord extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Lance l'activité type au clic sur l'image
+     * @param v
+     */
+    public void launch_lieu(View v) {
+        Intent intent = new Intent(this, Lieu.class);
+        startActivity(intent);
+    }
 }

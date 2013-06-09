@@ -3,12 +3,13 @@ package com.aikidonord;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.View;
+import android.view.*;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class AikidoNord extends Activity {
@@ -17,6 +18,42 @@ public class AikidoNord extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_aikido_nord);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        int orientation = display.getRotation();
+
+
+
+
+        int ivSize = 0;
+        RelativeLayout rl = (RelativeLayout)findViewById(R.id.layout_button);
+
+        if (orientation == Surface.ROTATION_270 || orientation == Surface.ROTATION_90){
+            ivSize = width/4;
+            rl.getLayoutParams().height = ivSize;
+            rl.getLayoutParams().width = ivSize * 4;
+        } else {
+            ivSize = width/2;
+            rl.getLayoutParams().height = ivSize * 2;
+            rl.getLayoutParams().width = ivSize * 2;
+        }
+
+        ImageView iv = (ImageView)findViewById(R.id.iv_choix_date_main);
+        iv.getLayoutParams().width = ivSize;
+        iv.getLayoutParams().height = ivSize;
+        iv = (ImageView)findViewById(R.id.iv_choix_theme_main);
+        iv.getLayoutParams().width = ivSize;
+        iv.getLayoutParams().height = ivSize;
+        iv = (ImageView)findViewById(R.id.iv_choix_lieux_main);
+        iv.getLayoutParams().width = ivSize;
+        iv.getLayoutParams().height = ivSize;
+        iv = (ImageView)findViewById(R.id.iv_choix_intervenant_main);
+        iv.getLayoutParams().width = ivSize;
+        iv.getLayoutParams().height = ivSize;
 
 		// on complète le label
 		TextView label_saison = (TextView) findViewById(R.id.tv_label_saison);

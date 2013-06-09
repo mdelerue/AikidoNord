@@ -10,41 +10,12 @@
     tools:context=".AikidoNord" >
 
     <RelativeLayout
-        android:id="@+id/layout_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/tv_label_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_label"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:id="@+id/tv_label_saison"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_app"
-            android:text="@string/saison_label"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/layout_button"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="600dp"
+        android:layout_height="150dp"
         android:layout_alignLeft="@+id/layout_label"
         android:layout_centerVertical="true"
-        android:background="@drawable/bg_rouge_portrait"
+        android:background="@drawable/bg_rouge_paysage"
         android:orientation="vertical" >
 
         <ImageView
@@ -52,7 +23,6 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:contentDescription="Intervenant"
             android:src="@drawable/icone_intervenant"
             android:onClick="launch_intervenant"
@@ -62,8 +32,7 @@
             android:id="@+id/iv_choix_theme_main"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/iv_choix_intervenant_main"
             android:contentDescription="Theme"
             android:src="@drawable/icone_type"
             android:onClick="launch_type"
@@ -73,8 +42,7 @@
                 android:id="@+id/iv_choix_lieux_main"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/iv_choix_theme_main"
                 android:contentDescription="Lieu"
                 android:src="@drawable/icone_lieu"
                 android:onClick="launch_lieu"
@@ -85,10 +53,40 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:contentDescription="Date"
+                android:layout_toRightOf="@id/iv_choix_lieux_main"
                 android:src="@drawable/ic_launcher"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
 
+                />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/layout_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/layout_button"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+        <TextView
+                android:id="@+id/tv_label_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_label"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true" />
+
+        <TextView
+                android:id="@+id/tv_label_saison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_label_app"
+                android:text="@string/saison_label"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </RelativeLayout>

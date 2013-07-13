@@ -2,11 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_app"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AikidoNord" >
 
     <RelativeLayout
@@ -15,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:background="@drawable/fond_header"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -23,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_label"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/taille_police_header"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -33,61 +31,87 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_label_app"
             android:text="@string/saison_label"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/taille_police_header"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_button"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignLeft="@+id/layout_label"
+        android:layout_below="@+id/layout_label"
         android:layout_centerVertical="true"
-        android:background="@drawable/bg_rouge_portrait"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_choix_intervenant_main"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+        <Button
+                android:id="@+id/btn_choix_intervenant_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cadre_menu"
+                android:text="@string/menu_recherche_intervenant"
+                android:textColor="@color/white"
+                android:textSize="@dimen/taille_police_menu"
+                android:onClick="launch_intervenant"/>
+
+        <Button
+                android:id="@+id/btn_choix_theme_main"
+                android:layout_below="@id/btn_choix_intervenant_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cadre_menu"
+                android:text="@string/menu_recherche_theme"
+                android:textColor="@color/white"
+                android:textSize="@dimen/taille_police_menu"
+                android:onClick="launch_type"/>
+
+        <Button
+                android:id="@+id/btn_choix_lieux_main"
+                android:layout_below="@id/btn_choix_theme_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cadre_menu"
+                android:text="@string/menu_recherche_lieu"
+                android:textColor="@color/white"
+                android:textSize="@dimen/taille_police_menu"
+                android:onClick="launch_lieu"/>
+
+        <Button
+                android:id="@+id/btn_choix_date_main"
+                android:layout_below="@id/btn_choix_lieux_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cadre_menu"
+                android:text="@string/menu_recherche_date"
+                android:textColor="@color/white"
+                android:textSize="@dimen/taille_police_menu" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/layout_footer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="Intervenant"
-            android:src="@drawable/icone_intervenant"
-            android:onClick="launch_intervenant"
-            android:clickable="true" />
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/fond_footer"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:onClick="lauch_siteWeb">
 
-        <ImageView
-            android:id="@+id/iv_choix_theme_main"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="Theme"
-            android:src="@drawable/icone_type"
-            android:onClick="launch_type"
-            android:clickable="true"/>
+        <Button
+                android:id="@+id/btn_label_footer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/footer_label"
+                android:textColor="@color/white"
+                android:background="@null"
+                android:textSize="@dimen/taille_police_footer"
+                android:layout_centerHorizontal="true"
+                />
 
-        <ImageView
-                android:id="@+id/iv_choix_lieux_main"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:contentDescription="Lieu"
-                android:src="@drawable/icone_lieu"
-                android:onClick="launch_lieu"
-                android:clickable="true" />
-
-        <ImageView
-                android:id="@+id/iv_choix_date_main"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:contentDescription="Date"
-                android:src="@drawable/ic_launcher"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

@@ -8,6 +8,14 @@
     
     <string name="app_label">Stage ligue Flandre Artois</string>
     <string name="saison_label">Saison</string>
+    <string name="footer_label">www.aikidonord.com</string>
+
+    <string name="url_site_web">http://www.aikidonord.com</string>
+
+    <string name="menu_recherche_intervenant">Recherche par intervenant</string>
+    <string name="menu_recherche_theme">Recherche par thème</string>
+    <string name="menu_recherche_lieu">Recherche par lieu</string>
+    <string name="menu_recherche_date">Recherche par date</string>
     
     <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
     <string name="api_param_from">from</string>

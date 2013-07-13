@@ -42,7 +42,8 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        android:background="@color/gris_menu">
 
         <Button
                 android:id="@+id/btn_choix_intervenant_main"

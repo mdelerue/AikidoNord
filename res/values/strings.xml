@@ -3,6 +3,7 @@
 
     <string name="app_name">Aikido Nord</string>
     <string name="reload">Recharger</string>
+    <string name="loading">Chargement</string>
     <string name="animePar">Animé par</string>
     <string name="horaires">Horaires</string>
     

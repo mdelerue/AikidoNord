@@ -49,16 +49,16 @@ public class ProchainsStages extends FragmentActivity {
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
-            this.mProgressDialog = ProgressDialog.show(this, "Chargement",
-                    "Chargement", true);
+            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
+                    getResources().getString(R.string.loading), true);
             // si l'ouverture de l'activité vient d'un Intent (ce qui devrait toujours être le cas)
             String type = b.getString("type");
             String data = b.getString("data");
 
             new QueryForProchainStageTask().execute(this.mProgressDialog, this, type, data);
         }  else if (savedInstanceState == null) {
-            this.mProgressDialog = ProgressDialog.show(this, "Chargement",
-                    "Chargement", true);
+            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
+                    getResources().getString(R.string.loading), true);
 		    // si on n'est pas dans le cas d'une restauration, on exécute la requête
 		    // requête par défaut
 		    new QueryForProchainStageTask().execute(this.mProgressDialog, this, null, null);
@@ -76,8 +76,8 @@ public class ProchainsStages extends FragmentActivity {
         // Selon l'id, on déclenche une action
         switch (item.getItemId()) {
            case R.id.reload:
-        	   this.mProgressDialog = ProgressDialog.show(this, "Chargement",
-       				"Chargement", true);
+               this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
+                       getResources().getString(R.string.loading), true);
        			new QueryForProchainStageTask().execute(this.mProgressDialog, this);
        			return true;
         }
@@ -249,11 +249,11 @@ public class ProchainsStages extends FragmentActivity {
 
 			lstage = lsp.getListeStage();
 
-
+            /*
             System.out.println("AIKIDONORD : " + lstage);
             System.out.println("AIKIDONORD : " + lstage.size());
             System.out.println("AIKIDONORD : data : " + this.data);
-
+            */
 			for (Stage s : lstage) {
 				// url de l'image
 				String src = s.getImg();
@@ -310,7 +310,7 @@ public class ProchainsStages extends FragmentActivity {
                 }
             }
 
-            System.out.println("AIKODONORD : " + url + "?" + from + paramSupplementaire);
+            //System.out.println("AIKODONORD : " + url + "?" + from + paramSupplementaire);
 			JSONObject jo = jr.getJSONFromUrl(url + "?" + from + paramSupplementaire);
 
 			return jo;

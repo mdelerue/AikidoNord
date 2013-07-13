@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import com.aikidonord.display.IntervenantAdapter;
 import com.aikidonord.display.LieuAdapter;
 import com.aikidonord.display.TypeAdapter;
@@ -31,9 +33,19 @@ public class Lieu extends ListActivity {
 
         setContentView(R.layout.activity_lieu);
 
-        this.mProgressDialog = ProgressDialog.show(this, "Chargement",
-                "Chargement",true);
+        this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
+                getResources().getString(R.string.loading),true);
         new QueryForTypeTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+    }
+
+
+    /**
+     * Retour à la HP
+     * @param v
+     */
+    public void retour_accueil(View v) {
+        Intent intent = new Intent(this, AikidoNord.class);
+        startActivity(intent);
     }
 
 

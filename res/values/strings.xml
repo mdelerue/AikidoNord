@@ -17,6 +17,8 @@
     <string name="menu_recherche_theme">Recherche par thème</string>
     <string name="menu_recherche_lieu">Recherche par lieu</string>
     <string name="menu_recherche_date">Recherche par date</string>
+
+    <string name="itineraire">Itinéraire</string>
     
     <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
     <string name="api_param_from">from</string>

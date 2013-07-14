@@ -50,20 +50,22 @@ public class DisplayStage {
 		SimpleDateFormat sdfCourt = new SimpleDateFormat("EEEE dd",
 				Locale.FRANCE);
 
-		
 
+        String dstr = sdf.format(stage.getDateDebut());
+        dstr = dstr.substring(0,1).toUpperCase() + dstr.substring(1);
 		// date
-		((TextView) view.findViewById(R.id.tv_date)).setText(sdf.format(stage.getDateDebut()));
+		((TextView) view.findViewById(R.id.tv_date)).setText(dstr);
 
 		// type de stage
 		((TextView) view.findViewById(R.id.tv_type)).setText(stage.getType());
 
 		// description
+        /*
 		((TextView) view.findViewById(R.id.tv_description)).setText(stage
 				.getDescription());
-
+        */
 		// tarif
-		((TextView) view.findViewById(R.id.tv_tarif)).setText(stage.getTarif());
+		//((TextView) view.findViewById(R.id.tv_tarif)).setText(stage.getTarif());
 
 		// salle
 		HashMap<String, String> mapLieu = stage.getMapLieu();
@@ -88,22 +90,23 @@ public class DisplayStage {
 		}
 		
 		TextView adresse = ((TextView) view.findViewById(R.id.tv_adresse));
-		adresse.setText(addr);
+		adresse.setText(mapLieu.containsKey("ville") ? mapLieu.get("ville") : addr);
 		
 		this.addrNavigation = addr.replace(" ", "+");
+
+        TextView itineraire = ((TextView) view.findViewById(R.id.tv_itineraire));
+		itineraire.setClickable(true);
 		
-		adresse.setClickable(true);
-		
-		// longclick sur l'adresse
-		adresse.setOnLongClickListener(new View.OnLongClickListener() {
+		// click sur l'itinéraire
+		itineraire.setOnClickListener(new View.OnClickListener() {
             
             @Override
-			public boolean onLongClick(View v) {
+			public void onClick(View v) {
             	// on lance la navigation
             	// google navigation pour le moment
 				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + addrNavigation ));
 				act.startActivity(i);
-				return true;
+				//return true;
 			}
         });
 		
@@ -127,7 +130,7 @@ public class DisplayStage {
 			
 			// fin si liste != null && !empty
 		} else {
-			((TextView)view.findViewById(R.id.tv_animePar)).setVisibility(View.GONE);
+			//((TextView)view.findViewById(R.id.tv_animePar)).setVisibility(View.GONE);
 			((TextView)view.findViewById(R.id.tv_animateurs)).setVisibility(View.GONE);
 		}
 		

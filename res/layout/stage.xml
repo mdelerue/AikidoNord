@@ -2,17 +2,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProchainStage" >
+    tools:context=".ProchainStage">
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/taille_police_stage"/>
     <TextView
         android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_date"/>
+        android:layout_below="@id/tv_date"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/taille_police_stage"/>
+    <!--
+    <TextView
+            android:id="@+id/tv_animePar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_adresse"
+            android:text="@string/animePar"/>
+    -->
+    <TextView
+            android:id="@+id/tv_animateurs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_type"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/taille_police_stage" />
+
+    <TextView
+            android:id="@+id/tv_adresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_animateurs"
+            android:textSize="@dimen/taille_police_stage" />
+
+    <TextView
+            android:id="@+id/tv_itineraire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_animateurs"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/taille_police_stage"
+            android:text="@string/itineraire"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/tv_salle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_adresse"
+            android:textSize="@dimen/taille_police_stage_petit"/>
+
+    <!--
     <TextView
         android:id="@+id/tv_tarif"
         android:layout_width="wrap_content"
@@ -23,44 +67,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tarif"/>
+    -->
+
     
-    <TextView
-        android:id="@+id/tv_salle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_description"/>
+
     
-    <TextView
-        android:id="@+id/tv_adresse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_salle"/>
-    
-    <TextView 
-		android:id="@+id/tv_animePar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_adresse"
-        android:text="@string/animePar"/>
-    
-    <TextView 
-		android:id="@+id/tv_animateurs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_animePar"/>
+
     
     <TextView 
 		android:id="@+id/tv_horairesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_animateurs"
-        android:text="@string/horaires"/>
+        android:layout_below="@id/tv_salle"
+        android:text="@string/horaires"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/taille_police_stage_petit" />
     
     <TextView 
 		android:id="@+id/tv_horaires"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_horairesLabel"/>
+        android:layout_below="@id/tv_horairesLabel"
+        android:textSize="@dimen/taille_police_stage_petit"/>
     
     <ImageView
         android:id="@+id/iv_affiche"

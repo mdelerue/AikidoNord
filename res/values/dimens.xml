@@ -7,6 +7,9 @@
     <dimen name="taille_police_liste">24dp</dimen>
     <dimen name="taille_police_header">18dp</dimen>
     <dimen name="taille_police_menu">20dp</dimen>
+    <dimen name="taille_police_stage">20dp</dimen>
+    <dimen name="taille_police_stage_petit">18dp</dimen>
+
     <dimen name="taille_police_footer">14dp</dimen>
 
     <dimen name="padding_liste">8dp</dimen>

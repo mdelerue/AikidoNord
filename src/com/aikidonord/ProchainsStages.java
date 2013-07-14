@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import android.content.Intent;
 import android.widget.TextView;
 import org.json.JSONObject;
 
@@ -138,6 +139,15 @@ public class ProchainsStages extends FragmentActivity {
         }
 
 	}
+
+    /**
+     * Retour à la HP
+     * @param v
+     */
+    public void retour_accueil(View v) {
+        Intent intent = new Intent(this, AikidoNord.class);
+        startActivity(intent);
+    }
 
 	/**
 	 * Adapter

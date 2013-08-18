@@ -215,7 +215,7 @@ public class ProchainsStages extends FragmentActivity {
 
 
 			DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
-					this.getActivity());
+					this.getActivity(), mNum, lstage.size());
 			//ProchainsStages.indexStage = mNum;
 
 			return ds.formatData();

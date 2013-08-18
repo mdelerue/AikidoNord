@@ -25,15 +25,19 @@ public class DisplayStage {
 	String addrNavigation;
 	private View view;
 	private Activity act;
+    private int nbStage;
+    private int numStage;
 
 	
 	
-	public DisplayStage(Stage stage, View view, Activity act) {
+	public DisplayStage(Stage stage, View view, Activity act, int numStage, int nbStage) {
 		
 		
 		this.stage = stage;
 		this.view = view;
 		this.act = act;
+        this.numStage = numStage;
+        this.nbStage = nbStage;
 
 	}
 
@@ -169,7 +173,11 @@ public class DisplayStage {
 		}
 		
 		
-		
+
+
+        TextView tv_num = (TextView)view.findViewById(R.id.tv_num);
+
+        tv_num.setText(++this.numStage + "/" + this.nbStage);
 		
 		
 		

@@ -79,6 +79,16 @@ public class AikidoNord extends Activity {
     }
 
     /**
+     * Lance l'activité date au clic sur l'image
+     *
+     * @param v
+     */
+    public void launch_date(View v) {
+        Intent intent = new Intent(this, DateActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Lance le site web au clic sur le footer
      *
      * @param v

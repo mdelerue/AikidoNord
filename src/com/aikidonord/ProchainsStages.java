@@ -148,15 +148,6 @@ public class ProchainsStages extends ActionBarActivity {
 
     }
 
-    /**
-     * Retour à la HP
-     *
-     * @param v
-     */
-    public void retour_accueil(View v) {
-        Intent intent = new Intent(this, AikidoNord.class);
-        startActivity(intent);
-    }
 
     /**
      * Adapter
@@ -322,10 +313,45 @@ public class ProchainsStages extends ActionBarActivity {
 
                     }
 
+                } else if (type.equals("date")) {
+                    try {
+
+                        String[] tab = data.split(" ");
+                        String mois = "";
+
+                        if (tab[0].equals("Janvier")) {
+                            mois = "01";
+                        } else if (tab[0].equals("Février")) {
+                            mois = "02";
+                        } else if (tab[0].equals("Mars")) {
+                            mois = "03";
+                        } else if (tab[0].equals("Avril")) {
+                            mois = "04";
+                        } else if (tab[0].equals("Mai")) {
+                            mois = "05";
+                        } else if (tab[0].equals("Juin")) {
+                            mois = "06";
+                        } else if (tab[0].equals("Juillet")) {
+                            mois = "07";
+                        } else if (tab[0].equals("Août")) {
+                            mois = "08";
+                        } else if (tab[0].equals("Septembre")) {
+                            mois = "09";
+                        } else if (tab[0].equals("Octobre")) {
+                            mois = "10";
+                        } else if (tab[0].equals("Novembre")) {
+                            mois = "11";
+                        } else if (tab[0].equals("Décembre")) {
+                            mois = "12";
+                        }
+
+                        paramSupplementaire = "&" + getResources().getString(R.string.api_param_date) + "=" + URLEncoder.encode(tab[1] + "-" + mois , "UTF-8");
+                    } catch (UnsupportedEncodingException _uee) {
+
+                    }
                 }
             }
 
-            //System.out.println("AIKODONORD : " + url + "?" + from + paramSupplementaire);
             JSONObject jo = jr.getJSONFromUrl(url + "?" + from + paramSupplementaire);
 
             return jo;

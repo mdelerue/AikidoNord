@@ -67,15 +67,6 @@ public class Type extends ActionBarActivity {
         }
     }
 
-    /**
-     * Retour à la HP
-     *
-     * @param v
-     */
-    public void retour_accueil(View v) {
-        Intent intent = new Intent(this, AikidoNord.class);
-        startActivity(intent);
-    }
 
 
     /**

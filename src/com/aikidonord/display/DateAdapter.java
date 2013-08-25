@@ -77,8 +77,8 @@ public class DateAdapter extends BaseAdapter {
         if (convertView == null) {
             view = this.inflater.inflate(resource, parent, false);
             ViewHolder holder = new ViewHolder();
-            holder.tv_lieu = (TextView) view
-                    .findViewById(R.id.searchList_lieu);
+            holder.tv_date = (TextView) view
+                    .findViewById(R.id.searchList_date);
 
             view.setTag(holder);
 
@@ -107,7 +107,7 @@ public class DateAdapter extends BaseAdapter {
         String date = this.data.get(position);
 
         // Nom
-        TextView tv = holder.tv_lieu;
+        TextView tv = holder.tv_date;
 
         // set the value
 
@@ -140,7 +140,7 @@ public class DateAdapter extends BaseAdapter {
     // ViewHolder Class
     static class ViewHolder {
 
-        TextView tv_lieu;
+        TextView tv_date;
 
 
     }

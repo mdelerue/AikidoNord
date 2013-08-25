@@ -5,14 +5,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import com.aikidonord.display.DateAdapter;
-import com.aikidonord.display.IntervenantAdapter;
-import com.aikidonord.metier.Animateur;
 import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
@@ -23,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -46,8 +43,18 @@ public class DateActivity extends ActionBarActivity{
 
         if (VerifConnexion.isOnline(this)) {
 
+
             this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
                     getResources().getString(R.string.loading), true);
+                   /*
+            runOnUiThread(new Runnable() {
+
+                public void run() {
+                    QueryForDateTask task = new QueryForDateTask();
+                    task.execute(DateActivity.this.mProgressDialog, DateActivity.this, DateActivity.this.getApplicationContext());
+                }
+            });
+            */
             new QueryForDateTask().execute(this.mProgressDialog, this, this.getApplicationContext());
         } else {
 
@@ -68,16 +75,6 @@ public class DateActivity extends ActionBarActivity{
 
     }
 
-
-    /**
-     * Retour à la HP
-     *
-     * @param v
-     */
-    public void retour_accueil(View v) {
-        Intent intent = new Intent(this, AikidoNord.class);
-        startActivity(intent);
-    }
 
     /**
      * Async
@@ -117,7 +114,7 @@ public class DateActivity extends ActionBarActivity{
 
             String from = getResources().getString(R.string.api_param_from);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
-            from += "=" + sdf.format(new DateActivity());
+            from += "=" + sdf.format(new Date());
 
             String url = getResources().getString(
                     R.string.api_dates_json);

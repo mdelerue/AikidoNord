@@ -2,7 +2,6 @@ package com.aikidonord;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,10 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import com.aikidonord.display.IntervenantAdapter;
 import com.aikidonord.display.LieuAdapter;
-import com.aikidonord.display.TypeAdapter;
-import com.aikidonord.metier.Animateur;
 import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
@@ -47,7 +43,7 @@ public class Lieu extends ActionBarActivity {
         if (VerifConnexion.isOnline(this)) {
             this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
                     getResources().getString(R.string.loading), true);
-            new QueryForTypeTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+            new QueryForLieuTask().execute(this.mProgressDialog, this, this.getApplicationContext());
         } else {
 
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -67,15 +63,6 @@ public class Lieu extends ActionBarActivity {
     }
 
 
-    /**
-     * Retour à la HP
-     *
-     * @param v
-     */
-    public void retour_accueil(View v) {
-        Intent intent = new Intent(this, AikidoNord.class);
-        startActivity(intent);
-    }
 
 
     /**
@@ -83,7 +70,7 @@ public class Lieu extends ActionBarActivity {
      *
      * @author Marc Delerue
      */
-    private class QueryForTypeTask extends
+    private class QueryForLieuTask extends
             AsyncTask<Object, Void, ArrayList<String>> {
 
         private ProgressDialog mProgressDialog;

@@ -33,7 +33,7 @@
     <string name="api_param_anim">idanim</string>
     <string name="api_param_type">type</string>
     <string name="api_param_lieu">lieu</string>
-    <string name="api_param_lieu">date</string>
+    <string name="api_param_date">date</string>
 
     <string name="api_animateurs_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getAnimateur.php</string>
     <string name="api_types_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getType.php</string>

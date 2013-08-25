@@ -85,7 +85,8 @@
                 android:background="@drawable/cadre_menu"
                 android:text="@string/menu_recherche_date"
                 android:textColor="@color/white"
-                android:textSize="@dimen/taille_police_menu" />
+                android:textSize="@dimen/taille_police_menu"
+                android:onClick="launch_date"/>
 
     </RelativeLayout>
 

@@ -17,7 +17,7 @@
 
     <ImageView
             android:src="@drawable/filet"
-            android:layout_below="@id/searchList_animateurNom"
+            android:layout_below="@id/searchList_date"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />

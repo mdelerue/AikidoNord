@@ -23,7 +23,7 @@ public class ListeStageParser {
 
 
         if (this.json != null) {
-        // si le retour json != null
+            // si le retour json != null
             try {
                 this.ParseObject();
             } catch (JSONException e) {

@@ -17,9 +17,8 @@ import com.aikidonord.metier.Animateur;
 import com.aikidonord.R;
 
 /**
- *
  * @author Marc Delerue
- * I used
+ *         I used
  *         http://nickcharlton.net/post/building-custom-android-listviews &
  *         http://blog.sachinshah.name/?p=62
  */
@@ -129,12 +128,9 @@ public class TypeAdapter extends BaseAdapter {
         });
 
 
-
         // return the final view object
         return view;
     }
-
-
 
 
     // ViewHolder Class

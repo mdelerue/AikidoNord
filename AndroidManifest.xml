@@ -5,11 +5,12 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 "
 
     <application
@@ -30,23 +31,43 @@
 
         <activity
             android:name=".ProchainsStages"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
             
         </activity>
 
         <activity
                 android:name="com.aikidonord.Intervenant"
-                android:theme="@android:style/Theme.NoTitleBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
 
         </activity>
         <activity
                 android:name="com.aikidonord.Type"
-                android:theme="@android:style/Theme.NoTitleBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
 
         </activity>
         <activity
                 android:name="com.aikidonord.Lieu"
-                android:theme="@android:style/Theme.NoTitleBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
+
+        </activity>
+
+        <activity android:name=".DateActivity"
+                  android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
 
         </activity>
 

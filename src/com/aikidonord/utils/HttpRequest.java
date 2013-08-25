@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class HttpRequest{
+public class HttpRequest {
 
     DefaultHttpClient httpClient;
     HttpContext localContext;
@@ -34,13 +34,13 @@ public class HttpRequest{
     HttpPost httpPost = null;
     HttpGet httpGet = null;
 
-    public HttpRequest(){
+    public HttpRequest() {
         HttpParams myParams = new BasicHttpParams();
 
         HttpConnectionParams.setConnectionTimeout(myParams, 10000);
         HttpConnectionParams.setSoTimeout(myParams, 10000);
-        httpClient = new DefaultHttpClient(myParams);       
-        localContext = new BasicHttpContext();    
+        httpClient = new DefaultHttpClient(myParams);
+        localContext = new BasicHttpContext();
     }
 
     public void clearCookies() {
@@ -74,7 +74,7 @@ public class HttpRequest{
         httpPost = new HttpPost(url);
         response = null;
 
-        StringEntity tmp = null;        
+        StringEntity tmp = null;
 
         //Log.d("LM", "Setting httpPost headers");
 
@@ -88,9 +88,9 @@ public class HttpRequest{
         }
 
         try {
-            tmp = new StringEntity(data,"UTF-8");
+            tmp = new StringEntity(data, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            Log.e("AikidoNord", "HttpUtils : UnsupportedEncodingException : "+e);
+            Log.e("AikidoNord", "HttpUtils : UnsupportedEncodingException : " + e);
         }
 
         httpPost.setEntity(tmp);
@@ -98,7 +98,7 @@ public class HttpRequest{
         //Log.d("LM", url + "?" + data);
 
         try {
-            response = httpClient.execute(httpPost,localContext);
+            response = httpClient.execute(httpPost, localContext);
 
             if (response != null) {
                 ret = EntityUtils.toString(response.getEntity());
@@ -107,16 +107,15 @@ public class HttpRequest{
             Log.e("AikidoNord", "HttpUtils: " + e);
         }
 
-       
 
         return ret;
     }
 
     public String sendGet(String url) {
-        httpGet = new HttpGet(url);  
+        httpGet = new HttpGet(url);
 
         try {
-            response = httpClient.execute(httpGet);  
+            response = httpClient.execute(httpGet);
         } catch (Exception e) {
             Log.e("AikidoNord", e.getMessage());
         }
@@ -125,7 +124,7 @@ public class HttpRequest{
 
         // we assume that the response body contains the error message  
         try {
-            ret = EntityUtils.toString(response.getEntity());  
+            ret = EntityUtils.toString(response.getEntity());
         } catch (IOException e) {
             Log.e("AikidoNord", e.getMessage());
         }
@@ -137,28 +136,28 @@ public class HttpRequest{
         InputStream in = null;
         int response = -1;
 
-        URL url = new URL(urlString); 
+        URL url = new URL(urlString);
         URLConnection conn = url.openConnection();
 
-        if (!(conn instanceof HttpURLConnection))                     
+        if (!(conn instanceof HttpURLConnection))
             throw new IOException("Not an HTTP connection");
 
-        try{
+        try {
             HttpURLConnection httpConn = (HttpURLConnection) conn;
             httpConn.setAllowUserInteraction(false);
             httpConn.setInstanceFollowRedirects(true);
             httpConn.setRequestMethod("GET");
-            httpConn.connect(); 
+            httpConn.connect();
 
-            response = httpConn.getResponseCode();                 
+            response = httpConn.getResponseCode();
 
             if (response == HttpURLConnection.HTTP_OK) {
-                in = httpConn.getInputStream();                                 
-            }                     
+                in = httpConn.getInputStream();
+            }
         } catch (Exception e) {
-            throw new IOException("Error connecting");            
+            throw new IOException("Error connecting");
         } // end try-catch
 
-        return in;     
+        return in;
     }
 }

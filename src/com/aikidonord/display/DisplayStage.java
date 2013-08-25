@@ -21,168 +21,163 @@ import android.widget.TextView;
 
 public class DisplayStage {
 
-	private Stage stage;
-	String addrNavigation;
-	private View view;
-	private Activity act;
+    private Stage stage;
+    String addrNavigation;
+    private View view;
+    private Activity act;
     private int nbStage;
     private int numStage;
 
-	
-	
-	public DisplayStage(Stage stage, View view, Activity act, int numStage, int nbStage) {
-		
-		
-		this.stage = stage;
-		this.view = view;
-		this.act = act;
+
+    public DisplayStage(Stage stage, View view, Activity act, int numStage, int nbStage) {
+
+
+        this.stage = stage;
+        this.view = view;
+        this.act = act;
         this.numStage = numStage;
         this.nbStage = nbStage;
 
-	}
+    }
 
-	/**
-	 * Formatage du stage
-	 * Utilise le layout défini dans vue pour afficher les données
-	 * @return
-	 */
-	public View formatData() {
-		
-		// les dateFormat pour afficher les date
-		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/MM/yyyy",
-				Locale.FRANCE);
-		SimpleDateFormat sdfCourt = new SimpleDateFormat("EEEE dd",
-				Locale.FRANCE);
+    /**
+     * Formatage du stage
+     * Utilise le layout défini dans vue pour afficher les données
+     *
+     * @return
+     */
+    public View formatData() {
+
+        // les dateFormat pour afficher les date
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/MM/yyyy",
+                Locale.FRANCE);
+        SimpleDateFormat sdfCourt = new SimpleDateFormat("EEEE dd",
+                Locale.FRANCE);
 
 
         String dstr = sdf.format(stage.getDateDebut());
-        dstr = dstr.substring(0,1).toUpperCase() + dstr.substring(1);
-		// date
-		((TextView) view.findViewById(R.id.tv_date)).setText(dstr);
+        dstr = dstr.substring(0, 1).toUpperCase() + dstr.substring(1);
+        // date
+        ((TextView) view.findViewById(R.id.tv_date)).setText(dstr);
 
-		// type de stage
-		((TextView) view.findViewById(R.id.tv_type)).setText(stage.getType());
+        // type de stage
+        ((TextView) view.findViewById(R.id.tv_type)).setText(stage.getType());
 
-		// description
+        // description
         /*
-		((TextView) view.findViewById(R.id.tv_description)).setText(stage
+        ((TextView) view.findViewById(R.id.tv_description)).setText(stage
 				.getDescription());
         */
-		// tarif
-		//((TextView) view.findViewById(R.id.tv_tarif)).setText(stage.getTarif());
+        // tarif
+        //((TextView) view.findViewById(R.id.tv_tarif)).setText(stage.getTarif());
 
-		// salle
-		HashMap<String, String> mapLieu = stage.getMapLieu();
-		
-		if (mapLieu.containsKey("salle")) {
-			((TextView) view.findViewById(R.id.tv_salle)).setText(mapLieu.get("salle"));
-		}
-		
-		// construction adresse
-		String addr = "";
-		
-		if (mapLieu.containsKey("rue")) {
-			addr += mapLieu.get("rue") + ", ";
-		}
-		
-		if (mapLieu.containsKey("codepostal")) {
-			addr += mapLieu.get("codepostal") + " ";
-		}
-		
-		if (mapLieu.containsKey("ville")) {
-			addr += mapLieu.get("ville");
-		}
-		
-		TextView adresse = ((TextView) view.findViewById(R.id.tv_adresse));
-		adresse.setText(mapLieu.containsKey("ville") ? mapLieu.get("ville") : addr);
-		
-		this.addrNavigation = addr.replace(" ", "+");
+        // salle
+        HashMap<String, String> mapLieu = stage.getMapLieu();
+
+        if (mapLieu.containsKey("salle")) {
+            ((TextView) view.findViewById(R.id.tv_salle)).setText(mapLieu.get("salle"));
+        }
+
+        // construction adresse
+        String addr = "";
+
+        if (mapLieu.containsKey("rue")) {
+            addr += mapLieu.get("rue") + ", ";
+        }
+
+        if (mapLieu.containsKey("codepostal")) {
+            addr += mapLieu.get("codepostal") + " ";
+        }
+
+        if (mapLieu.containsKey("ville")) {
+            addr += mapLieu.get("ville");
+        }
+
+        TextView adresse = ((TextView) view.findViewById(R.id.tv_adresse));
+        adresse.setText(mapLieu.containsKey("ville") ? mapLieu.get("ville") : addr);
+
+        this.addrNavigation = addr.replace(" ", "+");
 
         TextView itineraire = ((TextView) view.findViewById(R.id.tv_itineraire));
-		itineraire.setClickable(true);
-		
-		// click sur l'itinéraire
-		itineraire.setOnClickListener(new View.OnClickListener() {
-            
+        itineraire.setClickable(true);
+
+        // click sur l'itinéraire
+        itineraire.setOnClickListener(new View.OnClickListener() {
+
             @Override
-			public void onClick(View v) {
-            	// on lance la navigation
-            	// google navigation pour le moment
-				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + addrNavigation ));
-				act.startActivity(i);
-				//return true;
-			}
+            public void onClick(View v) {
+                // on lance la navigation
+                // google navigation pour le moment
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + addrNavigation));
+                act.startActivity(i);
+                //return true;
+            }
         });
-		
-		// animateur
-		List<String[]> la = this.stage.getListeAnimateur();
-		String animateurs = "";
-		int cpt = 0;
-		int max = la.size();
-		if (la != null && !la.isEmpty()) {
-		
-			for (String[] tab : la) {
-				animateurs += tab[0] + (tab[1] != null ? " (" + tab[1] + ")" : "");
 
-				if (cpt < max) {
-					animateurs += "\n";
-				}
-				cpt++;
-			} // fin parcours liste
-			
-			((TextView)view.findViewById(R.id.tv_animateurs)).setText(animateurs);
-			
-			// fin si liste != null && !empty
-		} else {
-			//((TextView)view.findViewById(R.id.tv_animePar)).setVisibility(View.GONE);
-			((TextView)view.findViewById(R.id.tv_animateurs)).setVisibility(View.GONE);
-		}
-		
-		
-		// horaires
-		LinkedHashMap<Date, List<String[]>> lh = this.stage.getHoraires();
-		String horaires = "";
-		
-		if (lh != null &&!lh.isEmpty()) {
-			
-			for (Entry<Date, List<String[]>> entry : lh.entrySet()) {
-				horaires += sdf.format(entry.getKey()) + "\n";
-				
-				
-				for (String[] tab : entry.getValue()) {
-					horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + "\n";
-				}
-				
-			}
-			
-			((TextView)view.findViewById(R.id.tv_horaires)).setText(horaires);
-			
-		} else {
-			((TextView)view.findViewById(R.id.tv_horairesLabel)).setVisibility(View.GONE);
-			((TextView)view.findViewById(R.id.tv_horaires)).setVisibility(View.GONE);
-		}
-		
-		// image 
-		if (this.stage.getImg() != null && !this.stage.getImg().equals("")) {
-			((ImageView)view.findViewById(R.id.iv_affiche))
-				.setImageBitmap(DrawableOperation.getBitmapFromStorage(this.stage.getId(),
-						this.stage.getDateDebut(),
-						this.act.getApplicationContext()));
-		} else {
-			((ImageView)view.findViewById(R.id.iv_affiche)).setVisibility(View.GONE);
-		}
-		
-		
+        // animateur
+        List<String[]> la = this.stage.getListeAnimateur();
+        String animateurs = "";
+        int cpt = 0;
+        int max = la.size();
+        if (la != null && !la.isEmpty()) {
+
+            for (String[] tab : la) {
+                animateurs += tab[0] + (tab[1] != null ? " (" + tab[1] + ")" : "");
+
+                if (cpt < max) {
+                    animateurs += "\n";
+                }
+                cpt++;
+            } // fin parcours liste
+
+            ((TextView) view.findViewById(R.id.tv_animateurs)).setText(animateurs);
+
+            // fin si liste != null && !empty
+        } else {
+            //((TextView)view.findViewById(R.id.tv_animePar)).setVisibility(View.GONE);
+            ((TextView) view.findViewById(R.id.tv_animateurs)).setVisibility(View.GONE);
+        }
 
 
-        TextView tv_num = (TextView)view.findViewById(R.id.tv_num);
+        // horaires
+        LinkedHashMap<Date, List<String[]>> lh = this.stage.getHoraires();
+        String horaires = "";
+
+        if (lh != null && !lh.isEmpty()) {
+
+            for (Entry<Date, List<String[]>> entry : lh.entrySet()) {
+                horaires += sdf.format(entry.getKey()) + "\n";
+
+
+                for (String[] tab : entry.getValue()) {
+                    horaires += tab[0] + (tab[1] != null ? " - " + tab[1] : "") + "\n";
+                }
+
+            }
+
+            ((TextView) view.findViewById(R.id.tv_horaires)).setText(horaires);
+
+        } else {
+            ((TextView) view.findViewById(R.id.tv_horairesLabel)).setVisibility(View.GONE);
+            ((TextView) view.findViewById(R.id.tv_horaires)).setVisibility(View.GONE);
+        }
+
+        // image
+        if (this.stage.getImg() != null && !this.stage.getImg().equals("")) {
+            ((ImageView) view.findViewById(R.id.iv_affiche))
+                    .setImageBitmap(DrawableOperation.getBitmapFromStorage(this.stage.getId(),
+                            this.stage.getDateDebut(),
+                            this.act.getApplicationContext()));
+        } else {
+            ((ImageView) view.findViewById(R.id.iv_affiche)).setVisibility(View.GONE);
+        }
+
+
+        TextView tv_num = (TextView) view.findViewById(R.id.tv_num);
 
         tv_num.setText(++this.numStage + "/" + this.nbStage);
-		
-		
-		
-		
-		
-		return view;
-	}
+
+
+        return view;
+    }
 }

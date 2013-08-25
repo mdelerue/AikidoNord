@@ -2,7 +2,6 @@ package com.aikidonord;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,43 +10,45 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import com.aikidonord.display.DateAdapter;
 import com.aikidonord.display.IntervenantAdapter;
-import com.aikidonord.display.LieuAdapter;
-import com.aikidonord.display.TypeAdapter;
 import com.aikidonord.metier.Animateur;
 import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Marc Delerue
+ * Date: 25/05/13
+ * Time: 16:43
  */
-public class Lieu extends ActionBarActivity {
+public class DateActivity extends ActionBarActivity{
     ProgressDialog mProgressDialog;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_lieu);
+        setContentView(R.layout.activity_date);
 
         ActionBar actionBar = this.getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(getResources().getString(R.string.actionbar_titre_lieu));
+        actionBar.setTitle(getResources().getString(R.string.actionbar_titre_date));
 
         if (VerifConnexion.isOnline(this)) {
+
             this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
                     getResources().getString(R.string.loading), true);
-            new QueryForTypeTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+            new QueryForDateTask().execute(this.mProgressDialog, this, this.getApplicationContext());
         } else {
 
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -59,11 +60,12 @@ public class Lieu extends ActionBarActivity {
                 public void onClick(DialogInterface dialog, int id) {
                     // if this button is clicked, close
                     // current activity
-                    Lieu.this.finish();
+                    DateActivity.this.finish();
                 }
             });
             alertDialog.show();
         }
+
     }
 
 
@@ -77,13 +79,12 @@ public class Lieu extends ActionBarActivity {
         startActivity(intent);
     }
 
-
     /**
      * Async
      *
      * @author Marc Delerue
      */
-    private class QueryForTypeTask extends
+    private class QueryForDateTask extends
             AsyncTask<Object, Void, ArrayList<String>> {
 
         private ProgressDialog mProgressDialog;
@@ -97,10 +98,10 @@ public class Lieu extends ActionBarActivity {
             this.act = (Activity) o[1];
             this.context = (Context) o[2];
 
-            ArrayList<String> listeLieu = this.parseJSON(this.startQuerying());
+            ArrayList<String> listeDate = this.parseJSON(this.startQuerying());
 
 
-            return listeLieu;
+            return listeDate;
 
         }
 
@@ -116,10 +117,10 @@ public class Lieu extends ActionBarActivity {
 
             String from = getResources().getString(R.string.api_param_from);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
-            from += "=" + sdf.format(new Date());
+            from += "=" + sdf.format(new DateActivity());
 
             String url = getResources().getString(
-                    R.string.api_lieux_json);
+                    R.string.api_dates_json);
 
 
             JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
@@ -139,7 +140,7 @@ public class Lieu extends ActionBarActivity {
             ArrayList<String> l = new ArrayList<String>();
 
             try {
-                JSONArray array = jsonObject.getJSONArray("lieux");
+                JSONArray array = jsonObject.getJSONArray("dates");
 
                 if (array != null) {
 
@@ -165,10 +166,10 @@ public class Lieu extends ActionBarActivity {
         /**
          * Exécution à la fin du traitement
          */
-        protected void onPostExecute(ArrayList<String> lLieu) {
+        protected void onPostExecute(ArrayList<String> lDate) {
 
             // Create items for the ListView
-            LieuAdapter adapter = new LieuAdapter(this.context, R.layout.searchitem_lieu, lLieu, this.act);
+            DateAdapter adapter = new DateAdapter(this.context, R.layout.searchitem_date, lDate, this.act);
             // specify the list adaptor
             ((ListView)findViewById(R.id.list)).setAdapter(adapter);
             this.mProgressDialog.dismiss();

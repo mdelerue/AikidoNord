@@ -1,7 +1,7 @@
 package com.aikidonord.metier;
 
 /**
-  * User: Marc Delerue
+ * User: Marc Delerue
  * Date: 31/05/13
  * Time: 22:30
  * To change this template use File | Settings | File Templates.

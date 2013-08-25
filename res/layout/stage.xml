@@ -1,13 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ProchainStage">
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProchainStage">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="@dimen/taille_police_stage"/>
     <TextView
         android:id="@+id/tv_type"
@@ -15,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_date"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:textSize="@dimen/taille_police_stage"/>
     <!--
     <TextView
@@ -30,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_type"
             android:layout_marginTop="10dp"
+            android:textColor="@color/white"
             android:textSize="@dimen/taille_police_stage" />
 
     <TextView
@@ -37,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_animateurs"
+            android:textColor="@color/white"
             android:textSize="@dimen/taille_police_stage" />
 
     <TextView
@@ -47,6 +56,7 @@
             android:layout_alignParentRight="true"
             android:textSize="@dimen/taille_police_stage"
             android:text="@string/itineraire"
+            android:textColor="@color/white"
             android:textStyle="bold"/>
 
     <TextView
@@ -54,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_adresse"
+            android:textColor="@color/white"
             android:textSize="@dimen/taille_police_stage_petit"/>
 
     <!--
@@ -82,6 +93,7 @@
         android:text="@string/horaires"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:textSize="@dimen/taille_police_stage_petit" />
     
     <TextView 
@@ -89,12 +101,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_horairesLabel"
+        android:textColor="@color/white"
         android:textSize="@dimen/taille_police_stage_petit"/>
     
     <ImageView
         android:id="@+id/iv_affiche"
         android:layout_width="75dp"
-    	android:layout_height="100dp"        
+    	android:layout_height="100dp"
+        android:textColor="@color/white"
         android:layout_below="@id/tv_horaires" />
 
 
@@ -103,6 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
         android:layout_alignParentRight="true" />
 
 </RelativeLayout>
+    </ScrollView>

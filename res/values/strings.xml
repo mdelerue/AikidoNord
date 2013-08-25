@@ -6,10 +6,12 @@
     <string name="loading">Chargement</string>
     <string name="animePar">Animé par</string>
     <string name="horaires">Horaires</string>
+    <string name="close">Fermer</string>
     
     <string name="app_label">Stages d\'Aikido Ligue Flandre Artois</string>
     <string name="saison_label">Saison</string>
     <string name="footer_label">www.aikidonord.com</string>
+    <string name="no_network">Aucune connexion à internet détectée.\nVeuillez vérifier votre connexion et réessayer</string>
 
     <string name="url_site_web">http://www.aikidonord.com</string>
 
@@ -18,6 +20,12 @@
     <string name="menu_recherche_lieu">Recherche par lieu</string>
     <string name="menu_recherche_date">Recherche par date</string>
 
+    <string name="actionbar_titre_intervenant">Intervenants</string>
+    <string name="actionbar_titre_theme">Thèmes</string>
+    <string name="actionbar_titre_lieu">Lieux</string>
+    <string name="actionbar_titre_date">Dates</string>
+    <string name="actionbar_titre_stage">Stages</string>
+
     <string name="itineraire">Itinéraire</string>
     
     <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
@@ -25,9 +33,12 @@
     <string name="api_param_anim">idanim</string>
     <string name="api_param_type">type</string>
     <string name="api_param_lieu">lieu</string>
+    <string name="api_param_lieu">date</string>
+
     <string name="api_animateurs_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getAnimateur.php</string>
     <string name="api_types_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getType.php</string>
     <string name="api_lieux_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getLieu.php</string>
+    <string name="api_dates_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getDate.php</string>
 
     
     

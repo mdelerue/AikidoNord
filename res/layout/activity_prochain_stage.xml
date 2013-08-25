@@ -1,59 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProchainStage"
-    android:background="@color/gris_fond">
 
-
-    <RelativeLayout
-            android:id="@+id/rl_top"
-            android:layout_width="fill_parent"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/barre_retour_accueil"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:onClick="retour_accueil">
-
-        <ImageButton
-                android:id="@+id/btn_retour_hp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/footer_label"
-                android:src="@drawable/home_blanc"
-                android:background="@null"
-                android:layout_centerHorizontal="true"
-                android:onClick="retour_accueil"
-                />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/rl_top"
             android:gravity="center"
             android:orientation="vertical">
-        
+
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp" android:background="@color/gris_fond">
         </android.support.v4.view.ViewPager>
 
         <TextView
             android:id="@+id/tv_noresult"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btn_retour_hp"
             android:padding="@dimen/padding_liste"
             android:textSize="@dimen/taille_police_liste"
             android:text="Pas de résultat"
@@ -62,4 +27,3 @@
 
     </RelativeLayout>
 
-</RelativeLayout>

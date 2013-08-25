@@ -53,7 +53,7 @@ public class Lieu extends ActionBarActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             alertDialog.setTitle(getResources().getString(R.string.app_name));
             alertDialog.setMessage(getResources().getString(R.string.no_network));
-            //alertDialog.setIcon(R.drawable.menu_item_hp);
+            alertDialog.setIcon(R.drawable.ic_launcher);
             alertDialog.setCancelable(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getResources().getString(R.string.close), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {

@@ -31,7 +31,7 @@
 
         <activity
             android:name=".ProchainsStages"
-            android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+            android:theme="@style/Theme.Base.AppCompat.Light" >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.aikidonord.AikidoNord"/>
@@ -40,7 +40,7 @@
 
         <activity
                 android:name="com.aikidonord.Intervenant"
-                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light" >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.aikidonord.AikidoNord"/>
@@ -48,7 +48,7 @@
         </activity>
         <activity
                 android:name="com.aikidonord.Type"
-                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light" >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.aikidonord.AikidoNord"/>
@@ -56,7 +56,7 @@
         </activity>
         <activity
                 android:name="com.aikidonord.Lieu"
-                android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+                android:theme="@style/Theme.Base.AppCompat.Light" >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.aikidonord.AikidoNord"/>
@@ -64,7 +64,7 @@
         </activity>
 
         <activity android:name="com.aikidonord.DateActivity"
-                  android:theme="@style/Theme.Base.AppCompat.Light.DarkActionBar" >
+                  android:theme="@style/Theme.Base.AppCompat.Light" >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.aikidonord.AikidoNord"/>

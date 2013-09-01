@@ -45,12 +45,20 @@
         android:layout_height="fill_parent"
         android:background="@color/gris_menu">
 
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
+
+
         <Button
                 android:id="@+id/btn_choix_intervenant_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cadre_menu"
                 android:text="@string/menu_recherche_intervenant"
+                android:layout_below="@id/logo"
                 android:textColor="@color/white"
                 android:textSize="@dimen/taille_police_menu"
                 android:onClick="launch_intervenant"/>

@@ -28,17 +28,17 @@
 
     <string name="itineraire">Itinéraire</string>
     
-    <string name="api_prochain_stage_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
+    <string name="api_prochain_stage_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getStage.php</string>
     <string name="api_param_from">from</string>
     <string name="api_param_anim">idanim</string>
     <string name="api_param_type">type</string>
     <string name="api_param_lieu">lieu</string>
     <string name="api_param_date">date</string>
 
-    <string name="api_animateurs_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getAnimateur.php</string>
-    <string name="api_types_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getType.php</string>
-    <string name="api_lieux_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getLieu.php</string>
-    <string name="api_dates_json">http://dev.aikidonord.com/wp-content/plugins/an_stage/API/getDate.php</string>
+    <string name="api_animateurs_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getAnimateur.php</string>
+    <string name="api_types_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getType.php</string>
+    <string name="api_lieux_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getLieu.php</string>
+    <string name="api_dates_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getDate.php</string>
 
     
     

@@ -103,7 +103,7 @@ public class AikidoNord extends Activity {
      * @param v
      */
     public void launch_date(View v) {
-        Intent intent = new Intent(this, DateActivity.class);
+        Intent intent = new Intent(this, ProchainsStages.class);
         startActivity(intent);
     }
 

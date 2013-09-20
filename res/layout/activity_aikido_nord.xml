@@ -52,22 +52,25 @@
             android:src="@drawable/logo" />
 
 
+        <!--
         <Button
                 android:id="@+id/btn_choix_intervenant_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cadre_menu"
                 android:text="@string/menu_recherche_intervenant"
-                android:layout_below="@id/logo"
+
                 android:textColor="@color/white"
                 android:textSize="@dimen/taille_police_menu"
                 android:onClick="launch_intervenant"/>
 
+                android:layout_below="@id/btn_choix_intervenant_main"
+          -->
         <Button
                 android:id="@+id/btn_choix_theme_main"
-                android:layout_below="@id/btn_choix_intervenant_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
                 android:background="@drawable/cadre_menu"
                 android:text="@string/menu_recherche_theme"
                 android:textColor="@color/white"

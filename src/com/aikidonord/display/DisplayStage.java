@@ -95,7 +95,7 @@ public class DisplayStage {
         HashMap<String, String> mapLieu = stage.getMapLieu();
 
         if (mapLieu.containsKey("salle")) {
-            ((TextView) view.findViewById(R.id.tv_salle)).setText(mapLieu.get("salle"));
+            ((TextView) view.findViewById(R.id.tv_salle)).setText(mapLieu.get("salle").replaceAll("\\'", "'"));
         }
 
         // construction adresse
@@ -114,7 +114,7 @@ public class DisplayStage {
         }
 
         TextView adresse = ((TextView) view.findViewById(R.id.tv_adresse));
-        adresse.setText(mapLieu.containsKey("ville") ? mapLieu.get("ville") : addr);
+        adresse.setText(mapLieu.containsKey("ville") ? mapLieu.get("ville").replaceAll("\\'", "'") : addr.replaceAll("\\'", "'"));
 
         this.addrNavigation = addr.replace(" ", "+");
 
@@ -150,7 +150,7 @@ public class DisplayStage {
                 cpt++;
             } // fin parcours liste
 
-            ((TextView) view.findViewById(R.id.tv_animateurs)).setText(animateurs);
+            ((TextView) view.findViewById(R.id.tv_animateurs)).setText(animateurs.replaceAll("\\'", "'"));
 
             // fin si liste != null && !empty
         } else {

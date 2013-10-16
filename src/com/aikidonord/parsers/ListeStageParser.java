@@ -60,7 +60,7 @@ public class ListeStageParser {
      */
     private void ParseObject() throws JSONException {
 
-        System.out.println("AIKIDONORD : " + (this.json != null ? "OK" : "NULL"));
+        //System.out.println("AIKIDONORD : " + (this.json != null ? "OK" : "NULL"));
         JSONArray stages = this.json.has(TAG_STAGES) ? this.json
                 .getJSONArray(TAG_STAGES) : null;
 

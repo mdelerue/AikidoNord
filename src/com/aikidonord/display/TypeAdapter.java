@@ -75,8 +75,12 @@ public class TypeAdapter extends BaseAdapter {
     }
 
     public long getItemId(int position) {
-        // temp
-        return Integer.getInteger(this.data.get(position));
+        /*
+          voir http://stackoverflow.com/questions/18706854/android-nullpointerexception-onitemclick-in-listview-after-adding-new-item-to-l
+          à priori retourner la position devrait suffire
+          return Integer.getInteger(this.data.get(position));
+         */
+        return position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

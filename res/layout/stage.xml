@@ -1,124 +1,130 @@
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ProchainStage">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/taille_police_stage"/>
+        <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/taille_police_stage"/>
+
+        <TextView
+                android:id="@+id/tv_animateurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_type"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/taille_police_stage"/>
+
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".ProchainStage">
+                android:layout_height="40px"
+                android:layout_below="@id/tv_animateurs"
+                android:id="@+id/rl_adresse"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="@dimen/taille_police_stage"/>
-    <TextView
-        android:id="@+id/tv_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_date"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/taille_police_stage"/>
-    <!--
-    <TextView
-            android:id="@+id/tv_animePar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_adresse"
-            android:text="@string/animePar"/>
-    -->
-    <TextView
-            android:id="@+id/tv_animateurs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_type"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/taille_police_stage" />
-
-    <TextView
-            android:id="@+id/tv_adresse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_animateurs"
-            android:textColor="@color/white"
-            android:textSize="@dimen/taille_police_stage" />
-
-    <TextView
-            android:id="@+id/tv_itineraire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_animateurs"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/taille_police_stage"
-            android:text="@string/itineraire"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
-
-    <TextView
-            android:id="@+id/tv_salle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_adresse"
-            android:textColor="@color/white"
-            android:textSize="@dimen/taille_police_stage_petit"/>
-
-    <!--
-    <TextView
-        android:id="@+id/tv_tarif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_type"/>
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_tarif"/>
-    -->
-
-    
-
-    
-
-    
-    <TextView 
-		android:id="@+id/tv_horairesLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_salle"
-        android:text="@string/horaires"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/taille_police_stage_petit" />
-    
-    <TextView 
-		android:id="@+id/tv_horaires"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_horairesLabel"
-        android:textColor="@color/white"
-        android:textSize="@dimen/taille_police_stage_petit"/>
-    
-    <ImageView
-        android:id="@+id/iv_affiche"
-        android:layout_width="75dp"
-    	android:layout_height="100dp"
-        android:textColor="@color/white"
-        android:layout_below="@id/tv_horaires" />
+            <TextView
+                    android:id="@+id/tv_adresse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/taille_police_stage"
+                    android:text="adresse"/>
 
 
-    <TextView
-        android:id="@+id/tv_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:layout_alignParentRight="true" />
+            <ImageView
+                    android:id="@+id/tv_itineraire"
+                    android:src="@drawable/right_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_adresse"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"/>
 
-</RelativeLayout>
-    </ScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_adresse"
+                android:id="@+id/rl_sup"
+                android:layout_marginTop="10dp">
+
+            <TextView
+                    android:id="@+id/tv_salle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/taille_police_stage_petit"/>
+
+            <!--
+            <TextView
+                android:id="@+id/tv_tarif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_type"/>
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tarif"/>
+            -->
+
+
+            <TextView
+                    android:id="@+id/tv_horairesLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_salle"
+                    android:text="@string/horaires"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/taille_police_stage_petit"/>
+
+            <TextView
+                    android:id="@+id/tv_horaires"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_horairesLabel"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/taille_police_stage_petit"/>
+
+            <ImageView
+                    android:id="@+id/iv_affiche"
+                    android:layout_width="75dp"
+                    android:layout_height="100dp"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/tv_horaires"/>
+
+
+            <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

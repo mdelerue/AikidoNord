@@ -92,25 +92,6 @@ public class ProchainsStages extends ActionBarActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.prochain_stage, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Selon l'id, on déclenche une action
-        switch (item.getItemId()) {
-            case R.id.reload:
-                this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
-                        getResources().getString(R.string.loading), true);
-                new QueryForProchainStageTask().execute(this.mProgressDialog, this);
-                return true;
-        }
-
-        return false;
-    }
 
     /**
      * Surcharge de la sauvegarde

@@ -71,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logo"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/cadre_menu"
                 android:text="@string/menu_recherche_theme"
                 android:textColor="@color/white"

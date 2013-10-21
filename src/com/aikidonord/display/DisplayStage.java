@@ -118,7 +118,7 @@ public class DisplayStage {
 
         this.addrNavigation = addr.replace(" ", "+");
 
-        TextView itineraire = ((TextView) view.findViewById(R.id.tv_itineraire));
+        ImageView itineraire = ((ImageView) view.findViewById(R.id.tv_itineraire));
         itineraire.setClickable(true);
 
         // click sur l'itinéraire
@@ -144,7 +144,7 @@ public class DisplayStage {
             for (String[] tab : la) {
                 animateurs += tab[0] + (tab[1] != null ? " (" + tab[1] + ")" : "");
 
-                if (cpt < max) {
+                if (cpt < (max - 1)) {
                     animateurs += "\n";
                 }
                 cpt++;

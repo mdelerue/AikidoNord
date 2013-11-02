@@ -1,8 +1,5 @@
 package com.aikidonord.display;
 
-import java.util.ArrayList;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.aikidonord.ProchainsStages;
-import com.aikidonord.metier.Animateur;
 import com.aikidonord.R;
+import com.aikidonord.metier.Animateur;
+
+import java.util.ArrayList;
 
 /**
  * @author Marc Delerue

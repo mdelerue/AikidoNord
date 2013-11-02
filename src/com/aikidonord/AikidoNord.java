@@ -19,18 +19,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
 
-import java.util.Calendar;
-import java.util.Date;
-
-import android.graphics.Point;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.*;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class AikidoNord extends Activity {
 

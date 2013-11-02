@@ -19,13 +19,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
 
-import java.util.ArrayList;
-
+import com.aikidonord.metier.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.aikidonord.metier.Stage;
+import java.util.ArrayList;
 
 public class ListeStageParser {
 

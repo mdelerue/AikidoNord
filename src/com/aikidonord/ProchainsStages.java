@@ -19,6 +19,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import com.aikidonord.display.DisplayStage;
+import com.aikidonord.metier.Stage;
+import com.aikidonord.parsers.ListeStageParser;
+import com.aikidonord.utils.DrawableOperation;
+import com.aikidonord.utils.JSONRequest;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -26,38 +47,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.widget.TextView;
-import org.json.JSONObject;
-
-import com.aikidonord.display.DisplayStage;
-import com.aikidonord.metier.Stage;
-import com.aikidonord.parsers.ListeStageParser;
-import com.aikidonord.utils.DrawableOperation;
-import com.aikidonord.utils.JSONRequest;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
 public class ProchainsStages extends ActionBarActivity {
 
     static private ArrayList<Stage> lstage;
-    protected ProgressDialog mProgressDialog;
+
     protected ViewPager viewPager;
     protected StageAdapter sAdapter;
 
@@ -66,6 +59,9 @@ public class ProchainsStages extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prochain_stage);
+
+        View rlLoading = findViewById(R.id.loadingPanel);
+        View pager = findViewById(R.id.pager);
 
         ActionBar actionBar = this.getSupportActionBar();
 
@@ -76,19 +72,21 @@ public class ProchainsStages extends ActionBarActivity {
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
-            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
-                    getResources().getString(R.string.loading), true);
+
+            rlLoading.setVisibility(View.VISIBLE);
+            pager.setVisibility(View.GONE);
+
             // si l'ouverture de l'activité vient d'un Intent (ce qui devrait toujours être le cas)
             String type = b.getString("type");
             String data = b.getString("data");
 
-            new QueryForProchainStageTask().execute(this.mProgressDialog, this, type, data);
+            new QueryForProchainStageTask().execute(this, type, data);
         } else if (savedInstanceState == null) {
-            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
-                    getResources().getString(R.string.loading), true);
+            rlLoading.setVisibility(View.VISIBLE);
+            pager.setVisibility(View.GONE);
             // si on n'est pas dans le cas d'une restauration, on exécute la requête
             // requête par défaut
-            new QueryForProchainStageTask().execute(this.mProgressDialog, this, null, null);
+            new QueryForProchainStageTask().execute(this, null, null);
         }
     }
 
@@ -137,11 +135,13 @@ public class ProchainsStages extends ActionBarActivity {
 
             ((ViewPager) findViewById(R.id.pager)).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.tv_noresult)).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
             this.sAdapter = new StageAdapter(this.getSupportFragmentManager());
             this.viewPager.setAdapter(sAdapter);
 
         } else {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             ((ViewPager) findViewById(R.id.pager)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.tv_noresult)).setVisibility(View.VISIBLE);
         }
@@ -234,7 +234,6 @@ public class ProchainsStages extends ActionBarActivity {
     private class QueryForProchainStageTask extends
             AsyncTask<Object, Void, ArrayList<Stage>> {
 
-        private ProgressDialog mProgressDialog;
         private Activity act;
         // type de recherche
         private String type;
@@ -245,10 +244,9 @@ public class ProchainsStages extends ActionBarActivity {
 
             ArrayList<Stage> lstage = null;
 
-            this.mProgressDialog = (ProgressDialog) o[0];
-            this.act = (Activity) o[1];
-            this.type = (String) o[2];
-            this.data = (String) o[3];
+            this.act = (Activity) o[0];
+            this.type = (String) o[1];
+            this.data = (String) o[2];
 
 
             ListeStageParser lsp = new ListeStageParser(this.startQuerying());
@@ -366,8 +364,6 @@ public class ProchainsStages extends ActionBarActivity {
          * Exécution à la fin du traitement
          */
         protected void onPostExecute(ArrayList<Stage> lstage) {
-
-            this.mProgressDialog.dismiss();
 
             // mise en page
             ProchainsStages.this.displayStage(lstage);

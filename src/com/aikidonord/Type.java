@@ -2,24 +2,20 @@ package com.aikidonord;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ListView;
-import com.aikidonord.display.IntervenantAdapter;
 import com.aikidonord.display.TypeAdapter;
-import com.aikidonord.metier.Animateur;
 import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,12 +48,15 @@ import java.util.Locale;
  */
 
 public class Type extends ActionBarActivity {
-    ProgressDialog mProgressDialog;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_type);
+
+        View rlLoading = findViewById(R.id.loadingPanel);
+        View listView = findViewById(R.id.list);
 
         ActionBar actionBar = this.getSupportActionBar();
 
@@ -65,12 +64,14 @@ public class Type extends ActionBarActivity {
         actionBar.setTitle(getResources().getString(R.string.actionbar_titre_theme));
 
         if (VerifConnexion.isOnline(this)) {
-            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
-                    getResources().getString(R.string.loading), true);
-            new QueryForTypeTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+            rlLoading.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+
+            new QueryForTypeTask().execute(this, this.getApplicationContext());
+
         } else {
 
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            AlertDialog alertDialog =  new AlertDialog.Builder(this).create();
             alertDialog.setTitle(getResources().getString(R.string.app_name));
             alertDialog.setMessage(getResources().getString(R.string.no_network));
             alertDialog.setIcon(R.drawable.ic_launcher);
@@ -103,9 +104,9 @@ public class Type extends ActionBarActivity {
         protected ArrayList<String> doInBackground(Object... o) {
 
 
-            this.mProgressDialog = (ProgressDialog) o[0];
-            this.act = (Activity) o[1];
-            this.context = (Context) o[2];
+            //this.mProgressDialog = (ProgressDialog) o[0];
+            this.act = (Activity) o[0];
+            this.context = (Context) o[1];
 
             ArrayList<String> listeType = this.parseJSON(this.startQuerying());
 
@@ -179,9 +180,14 @@ public class Type extends ActionBarActivity {
 
             // Create items for the ListView
             TypeAdapter adapter = new TypeAdapter(this.context, R.layout.searchitem_type, lType, this.act);
+
+            // on change l'affichage
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            findViewById(R.id.list).setVisibility(View.VISIBLE);
+
             // specify the list adaptor
             ((ListView)findViewById(R.id.list)).setAdapter(adapter);
-            this.mProgressDialog.dismiss();
+            //this.mProgressDialog.dismiss();
 
 
         }

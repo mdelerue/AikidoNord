@@ -6,7 +6,12 @@
               android:layout_height="match_parent"
               android:background="@color/gris_fond">
 
-
+    <RelativeLayout
+            style="@style/GenericProgressBackground"
+            android:id="@+id/loadingPanel">
+        <ProgressBar
+                style="@style/GenericProgressIndicator"/>
+    </RelativeLayout>
 
 
     <ListView

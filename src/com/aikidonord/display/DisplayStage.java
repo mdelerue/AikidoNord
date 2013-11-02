@@ -20,24 +20,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map.Entry;
-
-import com.aikidonord.R;
-import com.aikidonord.metier.Stage;
-import com.aikidonord.utils.DrawableOperation;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.aikidonord.R;
+import com.aikidonord.metier.Stage;
+import com.aikidonord.utils.DrawableOperation;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class DisplayStage {
 

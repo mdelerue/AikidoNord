@@ -3,13 +3,12 @@ package com.aikidonord;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ListView;
 import com.aikidonord.display.IntervenantAdapter;
@@ -18,9 +17,6 @@ import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,12 +47,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
 public class Intervenant extends ActionBarActivity{
-    ProgressDialog mProgressDialog;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_intervenant);
+
+        View rlLoading = findViewById(R.id.loadingPanel);
+        View listView = findViewById(R.id.list);
 
         ActionBar actionBar = this.getSupportActionBar();
 
@@ -65,9 +64,10 @@ public class Intervenant extends ActionBarActivity{
 
         if (VerifConnexion.isOnline(this)) {
 
-            this.mProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.loading),
-                    getResources().getString(R.string.loading), true);
-            new QueryForAnimateurTask().execute(this.mProgressDialog, this, this.getApplicationContext());
+            rlLoading.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+
+            new QueryForAnimateurTask().execute(this, this.getApplicationContext());
         } else {
 
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -96,16 +96,13 @@ public class Intervenant extends ActionBarActivity{
     private class QueryForAnimateurTask extends
             AsyncTask<Object, Void, ArrayList<Animateur>> {
 
-        private ProgressDialog mProgressDialog;
         private Activity act;
         private Context context;
 
         protected ArrayList<Animateur> doInBackground(Object... o) {
 
-
-            this.mProgressDialog = (ProgressDialog) o[0];
-            this.act = (Activity) o[1];
-            this.context = (Context) o[2];
+            this.act = (Activity) o[0];
+            this.context = (Context) o[1];
 
             ArrayList<Animateur> listeIntervenant = this.parseJSON(this.startQuerying());
 
@@ -179,9 +176,14 @@ public class Intervenant extends ActionBarActivity{
 
             // Create items for the ListView
             IntervenantAdapter adapter = new IntervenantAdapter(this.context, R.layout.searchitem_intervenant, lInter, this.act);
+
+            // on change l'affichage
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            findViewById(R.id.list).setVisibility(View.VISIBLE);
+
             // specify the list adaptor
             ((ListView)findViewById(R.id.list)).setAdapter(adapter);
-            this.mProgressDialog.dismiss();
+
 
 
         }

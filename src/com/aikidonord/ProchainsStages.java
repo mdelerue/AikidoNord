@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class ProchainsStages extends ActionBarActivity {
 
     static private ArrayList<Stage> lstage;
@@ -124,7 +125,7 @@ public class ProchainsStages extends ActionBarActivity {
     /**
      * Mise en page de la liste de stage
      *
-     * @param lstage
+     * @param lstage liste des objets stages
      */
     private void displayStage(ArrayList<Stage> lstage) {
 

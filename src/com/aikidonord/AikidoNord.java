@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -64,6 +65,19 @@ public class AikidoNord extends Activity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.mi_about:
+                this.launch_about();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     /**
      * Lance l'activité intervenant au clic sur l'image
@@ -102,6 +116,14 @@ public class AikidoNord extends Activity {
      */
     public void launch_date(View v) {
         Intent intent = new Intent(this, ProchainsStages.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Lance l'activité "A propos"
+     */
+    private void launch_about() {
+        Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }
 

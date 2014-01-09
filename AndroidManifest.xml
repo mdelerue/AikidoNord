@@ -70,6 +70,13 @@
                     android:value="com.aikidonord.AikidoNord"/>
 
         </activity>
+        <activity android:name="com.aikidonord.About"
+                  android:theme="@style/Theme.Base.AppCompat.Light" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.aikidonord.AikidoNord"/>
+
+        </activity>
 
     </application>
 

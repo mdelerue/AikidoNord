@@ -83,8 +83,6 @@ public class Lieu extends ActionBarActivity {
     }
 
 
-
-
     /**
      * Async
      *
@@ -180,8 +178,7 @@ public class Lieu extends ActionBarActivity {
             findViewById(R.id.list).setVisibility(View.VISIBLE);
 
             // specify the list adaptor
-            ((ListView)findViewById(R.id.list)).setAdapter(adapter);
-
+            ((ListView) findViewById(R.id.list)).setAdapter(adapter);
 
 
         }

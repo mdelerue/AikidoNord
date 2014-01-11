@@ -344,7 +344,7 @@ public class ProchainsStages extends ActionBarActivity {
                             mois = "12";
                         }
 
-                        paramSupplementaire = "&" + getResources().getString(R.string.api_param_date) + "=" + URLEncoder.encode(tab[1] + "-" + mois , "UTF-8");
+                        paramSupplementaire = "&" + getResources().getString(R.string.api_param_date) + "=" + URLEncoder.encode(tab[1] + "-" + mois, "UTF-8");
                     } catch (UnsupportedEncodingException _uee) {
 
                     }

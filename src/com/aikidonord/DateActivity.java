@@ -46,7 +46,7 @@ import java.util.Locale;
  * Date: 25/05/13
  * Time: 16:43
  */
-public class DateActivity extends ActionBarActivity{
+public class DateActivity extends ActionBarActivity {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,6 @@ public class DateActivity extends ActionBarActivity{
         private Context context;
 
         protected ArrayList<String> doInBackground(Object... o) {
-
 
 
             this.act = (Activity) o[0];
@@ -185,7 +184,7 @@ public class DateActivity extends ActionBarActivity{
             findViewById(R.id.list).setVisibility(View.VISIBLE);
 
             // specify the list adaptor
-            ((ListView)findViewById(R.id.list)).setAdapter(adapter);
+            ((ListView) findViewById(R.id.list)).setAdapter(adapter);
 
         }
     } // fin async

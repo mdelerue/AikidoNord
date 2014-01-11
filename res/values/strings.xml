@@ -13,8 +13,12 @@
     <string name="saison_label">Saison</string>
     <string name="footer_label">www.aikidonord.com</string>
     <string name="no_network">Aucune connexion à internet détectée.\nVeuillez vérifier votre connexion et réessayer</string>
+    <string name="no_email_client">Aucun client e-mail n\'est disponible</string>
+    <string name="url_form">http://www.aikidonord.com/application-aikidonord/</string>
+    <string name="url_github">https://github.com/mdelerue/AikidoNord</string>
 
     <string name="url_site_web">http://www.aikidonord.com</string>
+    <string name="email_dev">debug@aikidonord.com</string>
 
     <string name="menu_recherche_intervenant">Recherche par intervenant</string>
     <string name="menu_recherche_theme">Recherche par thème</string>
@@ -40,6 +44,13 @@
     <string name="api_types_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getType.php</string>
     <string name="api_lieux_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getLieu.php</string>
     <string name="api_dates_json">http://www.aikidonord.com/wp-content/plugins/an_stage/API/getDate.php</string>
+
+    <string name="about_texte">Cette application est distribuée sous la licence GNU GPL v2. Le code source est disponible sur Github.</string>
+    <string name="about_texte_2">Les remontées de bug et les suggestions peuvent se faire via le formulaire disponible sur le site de la ligue ou directement par mail en utilisant le lien ci-dessous.</string>
+
+
+
+
 
     
     

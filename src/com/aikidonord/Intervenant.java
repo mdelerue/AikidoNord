@@ -46,7 +46,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
-public class Intervenant extends ActionBarActivity{
+public class Intervenant extends ActionBarActivity {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -182,8 +182,7 @@ public class Intervenant extends ActionBarActivity{
             findViewById(R.id.list).setVisibility(View.VISIBLE);
 
             // specify the list adaptor
-            ((ListView)findViewById(R.id.list)).setAdapter(adapter);
-
+            ((ListView) findViewById(R.id.list)).setAdapter(adapter);
 
 
         }

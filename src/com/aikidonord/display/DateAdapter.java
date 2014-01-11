@@ -39,7 +39,6 @@ import com.aikidonord.R;
 import java.util.ArrayList;
 
 
-
 public class DateAdapter extends BaseAdapter {
 
     // store the context (as an inflated layout)
@@ -129,7 +128,7 @@ public class DateAdapter extends BaseAdapter {
         String texte = date;
         tv.setText(texte);
 
-        final String dateOC = date.substring(0, date.indexOf("(") -1 );
+        final String dateOC = date.substring(0, date.indexOf("(") - 1);
 
         view.setOnClickListener(new View.OnClickListener() {
 

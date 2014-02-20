@@ -19,10 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  */
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AikidoNord extends Activity {
+public class AikidoNord extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gris_fond"
+                android:paddingLeft="15px"
+                android:paddingRight="15px">
+
+
+    <TextView
+            android:id="@+id/tv_titre_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/taille_police_stage"
+            android:paddingTop="5px"
+            android:paddingBottom="10px"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+    <TextView
+            android:id="@+id/tv_texte_about"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_titre_about"
+            android:text="@string/about_texte"
+            android:textColor="@color/white"
+            android:textSize="@dimen/taille_police_stage_petit"/>
+
+    <TextView
+            android:id="@+id/tv_texte_about_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_texte_about"
+            android:text="@string/about_texte_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/taille_police_stage_petit"
+            android:paddingTop="10px"
+            android:paddingBottom="10px"/>
+
+    <Button android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lien_mail"
+            android:text="Envoyer un e-mail"
+            android:onClick="launch_email_dev"
+            android:layout_below="@id/tv_texte_about_2"
+            android:textSize="@dimen/taille_police_stage_petit"
+            android:textColor="@color/white"/>
+
+    <Button android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lien_form"
+            android:text="Formulaire en ligne"
+            android:onClick="lauch_formulaire"
+            android:layout_below="@id/tv_lien_mail"
+            android:textSize="@dimen/taille_police_stage_petit"
+            android:textColor="@color/white"/>
+
+    <Button android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lien_source"
+            android:text="Code source de l'application"
+            android:onClick="lauch_github"
+            android:layout_below="@id/tv_lien_form"
+            android:textSize="@dimen/taille_police_stage_petit"
+            android:textColor="@color/white"/>
+
+
+</RelativeLayout>

@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -52,135 +53,14 @@ public class Lieu extends ActionBarActivity {
 
         setContentView(R.layout.activity_lieu);
 
-        View rlLoading = findViewById(R.id.loadingPanel);
-        View listView = findViewById(R.id.list);
-
         ActionBar actionBar = this.getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.actionbar_titre_lieu));
 
-        if (VerifConnexion.isOnline(this)) {
-            rlLoading.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
-            new QueryForLieuTask().execute(this, this.getApplicationContext());
-        } else {
+        /*
 
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle(getResources().getString(R.string.app_name));
-            alertDialog.setMessage(getResources().getString(R.string.no_network));
-            alertDialog.setIcon(R.drawable.ic_launcher);
-            alertDialog.setCancelable(false);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getResources().getString(R.string.close), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // if this button is clicked, close
-                    // current activity
-                    Lieu.this.finish();
-                }
-            });
-            alertDialog.show();
-        }
+        */
     }
 
-
-    /**
-     * Async
-     *
-     * @author Marc Delerue
-     */
-    private class QueryForLieuTask extends
-            AsyncTask<Object, Void, ArrayList<String>> {
-
-
-        private Activity act;
-        private Context context;
-
-        protected ArrayList<String> doInBackground(Object... o) {
-
-            this.act = (Activity) o[0];
-            this.context = (Context) o[1];
-
-            ArrayList<String> listeLieu = this.parseJSON(this.startQuerying());
-
-
-            return listeLieu;
-
-        }
-
-        /**
-         * requêtage de l'API.
-         *
-         * @return un JSONObject représentant la réponse de l'API
-         */
-        public JSONObject startQuerying() {
-
-            JSONRequest jr = new JSONRequest();
-
-
-            String from = getResources().getString(R.string.api_param_from);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
-            from += "=" + sdf.format(new Date());
-
-            String url = getResources().getString(
-                    R.string.api_lieux_json);
-
-
-            JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
-
-            return jo;
-
-        }
-
-        /**
-         * Parse le retour JSON de l'api
-         *
-         * @param jsonObject
-         * @return
-         */
-        public ArrayList<String> parseJSON(JSONObject jsonObject) {
-
-            ArrayList<String> l = new ArrayList<String>();
-
-            try {
-                JSONArray array = jsonObject.getJSONArray("lieux");
-
-                if (array != null) {
-
-                    for (int i = 0; i < array.length(); i++) {
-                        String type = array.getString(i);
-                        l.add(type);
-
-                    }    // fin parcours JSONArray
-
-                }
-
-            } catch (Exception _e) {
-
-            }
-
-            return l;
-        }
-
-        protected void onProgressUpdate(Integer... progress) {
-            // setProgressPercent(progress[0]);
-        }
-
-        /**
-         * Exécution à la fin du traitement
-         */
-        protected void onPostExecute(ArrayList<String> lLieu) {
-
-            // Create items for the ListView
-            LieuAdapter adapter = new LieuAdapter(this.context, R.layout.searchitem_lieu, lLieu, this.act);
-
-            // on change l'affichage
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            findViewById(R.id.list).setVisibility(View.VISIBLE);
-
-            // specify the list adaptor
-            ((ListView) findViewById(R.id.list)).setAdapter(adapter);
-
-
-        }
-    } // fin async
 }

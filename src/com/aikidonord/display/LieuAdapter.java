@@ -138,6 +138,7 @@ public class LieuAdapter extends BaseAdapter {
 
         final String lieuOC = lieu;
 
+
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override

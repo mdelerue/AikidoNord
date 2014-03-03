@@ -52,8 +52,8 @@ public class ProchainsStages extends ActionBarActivity {
 
     static private ArrayList<Stage> lstage;
 
-    protected ViewPager viewPager;
-    protected StageAdapter sAdapter;
+    //protected ViewPager viewPager;
+    //protected StageAdapter sAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +61,17 @@ public class ProchainsStages extends ActionBarActivity {
 
         setContentView(R.layout.activity_prochain_stage);
 
+        /*
         View rlLoading = findViewById(R.id.loadingPanel);
         View pager = findViewById(R.id.pager);
+        */
 
         ActionBar actionBar = this.getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.actionbar_titre_stage));
 
+        /*
         this.viewPager = (ViewPager) findViewById(R.id.pager);
 
         Bundle b = this.getIntent().getExtras();
@@ -89,6 +92,7 @@ public class ProchainsStages extends ActionBarActivity {
             // requête par défaut
             new QueryForProchainStageTask().execute(this, null, null);
         }
+        */
     }
 
 
@@ -113,7 +117,7 @@ public class ProchainsStages extends ActionBarActivity {
 
         // Restore state members from saved instance
         ArrayList<Stage> stage = savedInstanceState.getParcelableArrayList("stages");
-        this.displayStage(stage);
+        //this.displayStage(stage);
 
     }
 
@@ -127,6 +131,7 @@ public class ProchainsStages extends ActionBarActivity {
      *
      * @param lstage liste des objets stages
      */
+    /*
     private void displayStage(ArrayList<Stage> lstage) {
 
         this.lstage = lstage;
@@ -148,13 +153,14 @@ public class ProchainsStages extends ActionBarActivity {
         }
 
     }
-
+    */
 
     /**
      * Adapter
      *
      * @author Marc Delerue
      */
+    /*
     public static class StageAdapter extends FragmentStatePagerAdapter {
 
         public StageAdapter(FragmentManager fragmentManager) {
@@ -172,18 +178,21 @@ public class ProchainsStages extends ActionBarActivity {
         }
     } // fin adapter
 
+    */
+
     /**
      * StageFragment
      *
      * @author garth
      */
+    /*
     public static class StageFragment extends Fragment {
         int mNum;
 
-        /**
-         * Create a new instance of CountingFragment, providing "num" as an
-         * argument.
-         */
+
+         // Create a new instance of CountingFragment, providing "num" as an
+         // argument.
+
         static StageFragment newInstance(int num) {
             StageFragment f = new StageFragment();
 
@@ -195,18 +204,17 @@ public class ProchainsStages extends ActionBarActivity {
             return f;
         }
 
-        /**
-         * When creating, retrieve this instance's number from its arguments.
-         */
+
+         // When creating, retrieve this instance's number from its arguments.
+         //
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mNum = getArguments() != null ? getArguments().getInt("num") : 1;
         }
 
-        /**
-         * UI - Appel à un DisplayStage qui crée la vue à renvoyer
-         */
+
+         // UI - Appel à un DisplayStage qui crée la vue à renvoyer
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -227,11 +235,7 @@ public class ProchainsStages extends ActionBarActivity {
 
     } // fin StageFragment
 
-    /**
-     * Async
-     *
-     * @author Marc Delerue
-     */
+
     private class QueryForProchainStageTask extends
             AsyncTask<Object, Void, ArrayList<Stage>> {
 
@@ -254,11 +258,6 @@ public class ProchainsStages extends ActionBarActivity {
 
             lstage = lsp.getListeStage();
 
-            /*
-            System.out.println("AIKIDONORD : " + lstage);
-            System.out.println("AIKIDONORD : " + lstage.size());
-            System.out.println("AIKIDONORD : data : " + this.data);
-            */
             for (Stage s : lstage) {
                 // url de l'image
                 String src = s.getImg();
@@ -279,11 +278,11 @@ public class ProchainsStages extends ActionBarActivity {
 
         }
 
-        /**
-         * requêtage de l'API.
-         *
-         * @return un JSONObject représentant la réponse de l'API
-         */
+
+         // requêtage de l'API.
+
+         // @return un JSONObject représentant la réponse de l'API
+
         public JSONObject startQuerying() {
 
             JSONRequest jr = new JSONRequest();
@@ -361,9 +360,9 @@ public class ProchainsStages extends ActionBarActivity {
             // setProgressPercent(progress[0]);
         }
 
-        /**
-         * Exécution à la fin du traitement
-         */
+
+         // Exécution à la fin du traitement
+
         protected void onPostExecute(ArrayList<Stage> lstage) {
 
             // mise en page
@@ -371,5 +370,5 @@ public class ProchainsStages extends ActionBarActivity {
 
         }
     } // fin async
-
+    */
 }

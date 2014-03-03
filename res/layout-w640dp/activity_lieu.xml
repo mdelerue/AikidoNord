@@ -6,13 +6,13 @@
 
 <!-- "Fragment A" -->
     <fragment class="com.aikidonord.fragments.Lieu"
-              android:id="@+id/fragment_accueil"
+              android:id="@+id/fragment_lieu"
               android:layout_width="300dp"
               android:layout_height="match_parent"/>
 
     <!-- "Fragment B" -->
     <fragment class="com.aikidonord.fragments.ProchainsStages"
-              android:id="@+id/fragment_about"
+              android:id="@+id/fragment_prochains_stages"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
 

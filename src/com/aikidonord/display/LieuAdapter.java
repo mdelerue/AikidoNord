@@ -139,6 +139,7 @@ public class LieuAdapter extends BaseAdapter {
         final String lieuOC = lieu;
 
 
+        /*
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -152,7 +153,7 @@ public class LieuAdapter extends BaseAdapter {
                 parentActivity.startActivity(i);
             }
         });
-
+        */
 
         // return the final view object
         return view;

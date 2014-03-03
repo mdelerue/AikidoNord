@@ -21,14 +21,17 @@ package com.aikidonord.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import com.aikidonord.R;
 import com.aikidonord.display.LieuAdapter;
 import com.aikidonord.utils.JSONRequest;
@@ -46,6 +49,9 @@ public class Lieu extends ListFragment {
 
     private WeakReference<QueryForLieuTask> asyncTaskWeakRef;
 
+    // occurence de l'interface qui va communiquer avec l'activité
+    private OnLieuSelectedListener mCallback;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -58,7 +64,7 @@ public class Lieu extends ListFragment {
         if (VerifConnexion.isOnline(this.getActivity())) {
             rlLoading.setVisibility(View.VISIBLE);
 
-            // on va fair l'impasse la dessus vu que je ne suis pas bien sûr
+            // on va fair l'impasse là dessus vu que je ne suis pas bien sûr
             // de la manière dont il faut opérer tant que la vue n'a pas été renvoyée.
             //listView.setVisibility(View.GONE);
             this.lancementAsync();
@@ -83,16 +89,69 @@ public class Lieu extends ListFragment {
         return view;
     }
 
+    @Override
+    /**
+     * Au clic sur un élément de la liste.
+     */
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        String lieu = (String) l.getItemAtPosition(position);
+
+        FragmentManager fm = getFragmentManager();
+
+        if (fm.findFragmentById(R.id.fragment_prochains_stages) != null) {
+
+            // affichage tablette
+            mCallback.onLieuSelected(lieu);
+
+
+        } else {
+
+            // dans le cas de l'affichage téléphone classique
+
+            Intent i = new Intent(this.getActivity(), com.aikidonord.ProchainsStages.class);
+            // données à envoyer à l'activité
+            Bundle b = new Bundle();
+            b.putString("type", "lieu");
+            b.putString("data", String.valueOf(lieu));
+            i.putExtras(b);
+            this.getActivity().startActivity(i);
+
+        }
+
+
+    }
+
+
+
+    // Container Activity must implement this interface
+    public interface OnLieuSelectedListener {
+        public void onLieuSelected(String lieu);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnLieuSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnLieuSelectedListener");
+        }
+    }
+
 
     /**
      * Das subtilité pour faire de l'async dans des fragments
      */
     private void lancementAsync() {
         QueryForLieuTask asyncTask = new QueryForLieuTask(this);
-        this.asyncTaskWeakRef = new WeakReference<QueryForLieuTask>(asyncTask );
+        this.asyncTaskWeakRef = new WeakReference<QueryForLieuTask>(asyncTask);
         asyncTask.execute(this);
     }
-
 
 
     /**
@@ -113,9 +172,10 @@ public class Lieu extends ListFragment {
 
         /**
          * Et oui, il y a un constructeur...
+         *
          * @param fragment
          */
-        private QueryForLieuTask (Lieu fragment) {
+        private QueryForLieuTask(Lieu fragment) {
             this.fragmentWeakRef = new WeakReference<Lieu>(fragment);
         }
 
@@ -198,8 +258,6 @@ public class Lieu extends ListFragment {
 
         }
     } // fin async
-
-
 
 
 }

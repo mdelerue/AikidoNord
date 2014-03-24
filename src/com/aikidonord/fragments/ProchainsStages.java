@@ -20,14 +20,12 @@ package com.aikidonord.fragments;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,19 +34,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.aikidonord.R;
 import com.aikidonord.display.DisplayStage;
-import com.aikidonord.display.LieuAdapter;
 import com.aikidonord.metier.Stage;
 import com.aikidonord.parsers.ListeStageParser;
 import com.aikidonord.utils.DrawableOperation;
 import com.aikidonord.utils.JSONRequest;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class ProchainsStages extends Fragment {
@@ -123,7 +120,7 @@ public class ProchainsStages extends Fragment {
             ((TextView) this.getActivity().findViewById(R.id.tv_noresult)).setVisibility(View.GONE);
             ((RelativeLayout) this.getActivity().findViewById(R.id.loadingPanel)).setVisibility(View.GONE);
 
-            this.sAdapter = new StageAdapter(getFragmentManager());
+            this.sAdapter = new StageAdapter(getFragmentManager(), lstage);
             this.viewPager.setAdapter(sAdapter);
 
         } else {
@@ -137,10 +134,12 @@ public class ProchainsStages extends Fragment {
     /**
      * Das subtilité pour faire de l'async dans des fragments
      */
-    private void lancementAsync(String type, String data) {
+    public void lancementAsync(String type, String data) {
+
         QueryForProchainStageTask asyncTask = new QueryForProchainStageTask(this);
         this.asyncTaskWeakRef = new WeakReference<QueryForProchainStageTask>(asyncTask);
         asyncTask.execute(this, type, data);
+
     }
 
 
@@ -153,9 +152,9 @@ public class ProchainsStages extends Fragment {
 
         private ArrayList<Stage> ls;
 
-        public StageAdapter(FragmentManager fragmentManager) {
+        public StageAdapter(FragmentManager fragmentManager, ArrayList<Stage> lsp) {
             super(fragmentManager);
-            this.ls = ls;
+            this.ls = lsp;
         }
 
         @Override

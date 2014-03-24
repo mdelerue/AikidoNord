@@ -54,29 +54,14 @@ public class Lieu extends ActionBarActivity implements com.aikidonord.fragments.
 
         if (psFragment != null) {
 
-            Bundle b = new Bundle();
-            b.putString("type", "lieu");
-            b.putString("data", lieu);
+            // bon, on oublie le replace qui ne fonctionne pas
+            // si le fragment est dans le layout est on appelle
+            // directement le lancement de l'async du fragment.
+            // merci à la doc quasi-inexistante de google là-dessus...
+            psFragment.lancementAsync("lieu", lieu);
 
 
-            // Check what fragment is currently shown, replace if needed.
-
-            // Make new fragment to show this selection.
-            psFragment = ProchainsStages.newInstance(b);
-
-            // Execute a transaction, replacing any existing fragment
-            // with this one inside the frame.
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-            ft.replace(R.id.fragment_prochains_stages, psFragment);
-
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
         }
-
-
-        //psFragment.re  .getActivity().startActivityFromFragment();s onActivityCreated(b);
 
     }
 }

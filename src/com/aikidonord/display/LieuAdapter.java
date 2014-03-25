@@ -10,14 +10,11 @@ package com.aikidonord.display;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.aikidonord.ProchainsStages;
 import com.aikidonord.R;
 
 import java.util.ArrayList;
@@ -136,24 +133,6 @@ public class LieuAdapter extends BaseAdapter {
         String texte = lieu;
         tv.setText(texte);
 
-        final String lieuOC = lieu;
-
-
-        /*
-        view.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(parentActivity, ProchainsStages.class);
-                // données à envoyer à l'activité
-                Bundle b = new Bundle();
-                b.putString("type", "lieu");
-                b.putString("data", String.valueOf(lieuOC));
-                i.putExtras(b);
-                parentActivity.startActivity(i);
-            }
-        });
-        */
 
         // return the final view object
         return view;

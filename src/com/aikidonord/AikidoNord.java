@@ -116,7 +116,7 @@ public class AikidoNord extends FragmentActivity {
      * @param v
      */
     public void launch_date(View v) {
-        Intent intent = new Intent(this, ProchainsStages.class);
+        Intent intent = new Intent(this, DateActivity.class);
         startActivity(intent);
     }
 

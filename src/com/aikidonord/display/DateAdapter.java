@@ -26,14 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.aikidonord.ProchainsStages;
 import com.aikidonord.R;
 
 import java.util.ArrayList;
@@ -127,22 +124,6 @@ public class DateAdapter extends BaseAdapter {
 
         String texte = date;
         tv.setText(texte);
-
-        final String dateOC = date.substring(0, date.indexOf("(") - 1);
-
-        view.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(parentActivity, ProchainsStages.class);
-                // données à envoyer à l'activité
-                Bundle b = new Bundle();
-                b.putString("type", "date");
-                b.putString("data", String.valueOf(dateOC));
-                i.putExtras(b);
-                parentActivity.startActivity(i);
-            }
-        });
 
 
         // return the final view object

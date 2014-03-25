@@ -2,14 +2,11 @@ package com.aikidonord.display;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.aikidonord.ProchainsStages;
 import com.aikidonord.R;
 
 import java.util.ArrayList;
@@ -128,22 +125,6 @@ public class TypeAdapter extends BaseAdapter {
 
         String texte = type;
         tv.setText(texte);
-
-        final String typeOC = type;
-
-        view.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(parentActivity, ProchainsStages.class);
-                // données à envoyer à l'activité
-                Bundle b = new Bundle();
-                b.putString("type", "type");
-                b.putString("data", String.valueOf(typeOC));
-                i.putExtras(b);
-                parentActivity.startActivity(i);
-            }
-        });
 
 
         // return the final view object

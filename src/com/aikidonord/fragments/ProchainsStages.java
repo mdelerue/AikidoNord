@@ -20,6 +20,7 @@ package com.aikidonord.fragments;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,12 +57,13 @@ public class ProchainsStages extends Fragment {
 
     protected ViewPager viewPager;
     protected StageAdapter sAdapter;
+    protected View rlLoading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_prochain_stage, container, false);
 
-        View rlLoading = view.findViewById(R.id.loadingPanel);
+        this.rlLoading = view.findViewById(R.id.loadingPanel);
         View pager = view.findViewById(R.id.pager);
 
         this.viewPager = (ViewPager) view.findViewById(R.id.pager);
@@ -77,7 +79,7 @@ public class ProchainsStages extends Fragment {
             String type = b.getString("type");
             String data = b.getString("data");
 
-            this.lancementAsync(type, data);
+            this.lancementAsync(type, data, false);
 
 
         } else if (savedInstanceState == null) {
@@ -85,7 +87,7 @@ public class ProchainsStages extends Fragment {
             pager.setVisibility(View.GONE);
             // si on n'est pas dans le cas d'une restauration, on exécute la requête
             // requête par défaut
-            this.lancementAsync(null, null);
+            this.lancementAsync(null, null, false);
         }
 
 
@@ -134,11 +136,19 @@ public class ProchainsStages extends Fragment {
     /**
      * Das subtilité pour faire de l'async dans des fragments
      */
-    public void lancementAsync(String type, String data) {
+    public void lancementAsync(String type, String data, boolean MAJ) {
+
+        // dans le cas d'un rechargement par un autre fragment
+        // on remet le loading...
+        if (MAJ) {
+            this.rlLoading.setVisibility(View.VISIBLE);
+            this.viewPager.setVisibility(View.GONE);
+        }
 
         QueryForProchainStageTask asyncTask = new QueryForProchainStageTask(this);
         this.asyncTaskWeakRef = new WeakReference<QueryForProchainStageTask>(asyncTask);
         asyncTask.execute(this, type, data);
+
 
     }
 

@@ -58,7 +58,7 @@ public class Lieu extends ActionBarActivity implements com.aikidonord.fragments.
             // si le fragment est dans le layout est on appelle
             // directement le lancement de l'async du fragment.
             // merci à la doc quasi-inexistante de google là-dessus...
-            psFragment.lancementAsync("lieu", lieu);
+            psFragment.lancementAsync("lieu", lieu, true);
 
 
         }

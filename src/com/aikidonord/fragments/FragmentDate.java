@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class Date extends ListFragment {
+public class FragmentDate extends ListFragment {
 
     private WeakReference<QueryForDateTask> asyncTaskWeakRef;
 
@@ -79,7 +79,7 @@ public class Date extends ListFragment {
                 public void onClick(DialogInterface dialog, int id) {
                     // if this button is clicked, close
                     // current activity
-                    Date.this.getActivity().finish();
+                    FragmentDate.this.getActivity().finish();
                 }
             });
             alertDialog.show();
@@ -168,15 +168,15 @@ public class Date extends ListFragment {
         private Context context;
         private ListFragment lFragment;
 
-        private WeakReference<Date> fragmentWeakRef;
+        private WeakReference<FragmentDate> fragmentWeakRef;
 
         /**
          * Et oui, il y a un constructeur...
          *
          * @param fragment
          */
-        private QueryForDateTask(Date fragment) {
-            this.fragmentWeakRef = new WeakReference<Date>(fragment);
+        private QueryForDateTask(FragmentDate fragment) {
+            this.fragmentWeakRef = new WeakReference<FragmentDate>(fragment);
         }
 
         protected ArrayList<String> doInBackground(Object... o) {

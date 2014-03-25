@@ -3,6 +3,8 @@ package com.aikidonord;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import com.aikidonord.fragments.FragmentProchainsStages;
+import com.aikidonord.fragments.FragmentType;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +28,7 @@ import android.support.v7.app.ActionBarActivity;
  */
 
 public class Type extends ActionBarActivity
-        implements com.aikidonord.fragments.Type.OnTypeSelectedListener {
+        implements FragmentType.OnTypeSelectedListener {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class Type extends ActionBarActivity
     @Override
     public void onTypeSelected(String type) {
 
-        com.aikidonord.fragments.ProchainsStages psFragment =
-                (com.aikidonord.fragments.ProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
+        FragmentProchainsStages psFragment =
+                (FragmentProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
 
         if (psFragment != null) {
 

@@ -34,7 +34,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AikidoNord extends ActionBarActivity {
+public class Accueil extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

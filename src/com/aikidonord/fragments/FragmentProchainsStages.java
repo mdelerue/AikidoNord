@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class ProchainsStages extends Fragment {
+public class FragmentProchainsStages extends Fragment {
 
 
     static private ArrayList<Stage> lstage;
@@ -95,8 +95,8 @@ public class ProchainsStages extends Fragment {
     }
 
 
-    public static ProchainsStages newInstance(Bundle b) {
-        ProchainsStages f = new ProchainsStages();
+    public static FragmentProchainsStages newInstance(Bundle b) {
+        FragmentProchainsStages f = new FragmentProchainsStages();
 
         // Supply index input as an argument.
         f.setArguments(b);
@@ -220,7 +220,7 @@ public class ProchainsStages extends Fragment {
 
             DisplayStage ds = new DisplayStage(lstage.get(mNum), v,
                     this.getActivity(), mNum, lstage.size());
-            //ProchainsStages.indexStage = mNum;
+            //FragmentProchainsStages.indexStage = mNum;
 
             return ds.formatData();
         }
@@ -246,26 +246,26 @@ public class ProchainsStages extends Fragment {
 
 
         private Activity act;
-        private ProchainsStages fragment;
+        private FragmentProchainsStages fragment;
         // type de recherche
         private String type;
         // data associée
         private String data;
 
-        private WeakReference<ProchainsStages> fragmentWeakRef;
+        private WeakReference<FragmentProchainsStages> fragmentWeakRef;
 
         /**
          * Et oui, il y a un constructeur...
          *
          * @param fragment
          */
-        private QueryForProchainStageTask(ProchainsStages fragment) {
-            this.fragmentWeakRef = new WeakReference<ProchainsStages>(fragment);
+        private QueryForProchainStageTask(FragmentProchainsStages fragment) {
+            this.fragmentWeakRef = new WeakReference<FragmentProchainsStages>(fragment);
         }
 
         protected ArrayList<Stage> doInBackground(Object... o) {
 
-            this.fragment = (ProchainsStages) o[0];
+            this.fragment = (FragmentProchainsStages) o[0];
             this.act = this.fragment.getActivity();
 
             this.type = (String) o[1];

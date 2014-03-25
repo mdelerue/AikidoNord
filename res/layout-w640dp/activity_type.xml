@@ -5,13 +5,13 @@
               android:id="@+id/frags">
 
     <!-- "Fragment A" -->
-    <fragment class="com.aikidonord.fragments.Type"
+    <fragment class="com.aikidonord.fragments.FragmentType"
               android:id="@+id/fragment_type"
               android:layout_width="300dp"
               android:layout_height="match_parent"/>
 
     <!-- "Fragment B" -->
-    <fragment class="com.aikidonord.fragments.ProchainsStages"
+    <fragment class="com.aikidonord.fragments.FragmentProchainsStages"
               android:id="@+id/fragment_prochains_stages"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

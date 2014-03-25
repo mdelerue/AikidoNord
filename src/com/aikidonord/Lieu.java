@@ -22,13 +22,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import com.aikidonord.fragments.ProchainsStages;
+import com.aikidonord.fragments.FragmentLieu;
+import com.aikidonord.fragments.FragmentProchainsStages;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Marc Delerue
  */
-public class Lieu extends ActionBarActivity implements com.aikidonord.fragments.Lieu.OnLieuSelectedListener {
+public class Lieu extends ActionBarActivity implements FragmentLieu.OnLieuSelectedListener {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,8 @@ public class Lieu extends ActionBarActivity implements com.aikidonord.fragments.
     @Override
     public void onLieuSelected(String lieu) {
 
-        ProchainsStages psFragment =
-                (ProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
+        FragmentProchainsStages psFragment =
+                (FragmentProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
 
         if (psFragment != null) {
 

@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import com.aikidonord.R;
 
 
-public class Intervenant extends Fragment {
+public class FragmentIntervenant extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_intervenant, container, false);

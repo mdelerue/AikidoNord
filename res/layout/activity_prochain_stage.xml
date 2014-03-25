@@ -4,9 +4,5 @@
              android:id="@+id/frags">
     <!-- "Fragment A" -->
 
-    <fragment class="com.aikidonord.fragments.ProchainsStages"
-              android:id="@+id/fragment_prochains_stages"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"/>
 
 </FrameLayout>

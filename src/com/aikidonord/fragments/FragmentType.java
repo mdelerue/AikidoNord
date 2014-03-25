@@ -33,7 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.aikidonord.R;
-import com.aikidonord.display.LieuAdapter;
+import com.aikidonord.display.TypeAdapter;
 import com.aikidonord.utils.JSONRequest;
 import com.aikidonord.utils.VerifConnexion;
 import org.json.JSONArray;
@@ -45,17 +45,17 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class Lieu extends ListFragment {
+public class FragmentType extends ListFragment {
 
-    private WeakReference<QueryForLieuTask> asyncTaskWeakRef;
+    private WeakReference<QueryForTypeTask> asyncTaskWeakRef;
 
     // occurence de l'interface qui va communiquer avec l'activité
-    private OnLieuSelectedListener mCallback;
+    private OnTypeSelectedListener mCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_lieu, null /*container, false*/);
+        View view = inflater.inflate(R.layout.fragment_type, null /*container, false*/);
 
 
         View rlLoading = view.findViewById(R.id.loadingPanel);
@@ -79,7 +79,7 @@ public class Lieu extends ListFragment {
                 public void onClick(DialogInterface dialog, int id) {
                     // if this button is clicked, close
                     // current activity
-                    Lieu.this.getActivity().finish();
+                    FragmentType.this.getActivity().finish();
                 }
             });
             alertDialog.show();
@@ -95,14 +95,14 @@ public class Lieu extends ListFragment {
      */
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        String lieu = (String) l.getItemAtPosition(position);
+        String type = (String) l.getItemAtPosition(position);
 
         FragmentManager fm = getFragmentManager();
 
         if (fm.findFragmentById(R.id.fragment_prochains_stages) != null) {
 
             // affichage tablette
-            mCallback.onLieuSelected(lieu);
+            mCallback.onTypeSelected(type);
 
 
         } else {
@@ -112,8 +112,8 @@ public class Lieu extends ListFragment {
             Intent i = new Intent(this.getActivity(), com.aikidonord.ProchainsStages.class);
             // données à envoyer à l'activité
             Bundle b = new Bundle();
-            b.putString("type", "lieu");
-            b.putString("data", String.valueOf(lieu));
+            b.putString("type", "type");
+            b.putString("data", String.valueOf(type));
             i.putExtras(b);
             this.getActivity().startActivity(i);
 
@@ -125,8 +125,8 @@ public class Lieu extends ListFragment {
 
 
     // Container Activity must implement this interface
-    public interface OnLieuSelectedListener {
-        public void onLieuSelected(String lieu);
+    public interface OnTypeSelectedListener {
+        public void onTypeSelected(String lieu);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class Lieu extends ListFragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mCallback = (OnLieuSelectedListener) activity;
+            mCallback = (OnTypeSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnLieuSelectedListener");
@@ -148,8 +148,8 @@ public class Lieu extends ListFragment {
      * Das subtilité pour faire de l'async dans des fragments
      */
     private void lancementAsync() {
-        QueryForLieuTask asyncTask = new QueryForLieuTask(this);
-        this.asyncTaskWeakRef = new WeakReference<QueryForLieuTask>(asyncTask);
+        QueryForTypeTask asyncTask = new QueryForTypeTask(this);
+        this.asyncTaskWeakRef = new WeakReference<QueryForTypeTask>(asyncTask);
         asyncTask.execute(this);
     }
 
@@ -160,7 +160,7 @@ public class Lieu extends ListFragment {
      * @author Marc Delerue
      */
 
-    private static class QueryForLieuTask extends
+    private static class QueryForTypeTask extends
             AsyncTask<Object, Void, ArrayList<String>> {
 
 
@@ -168,15 +168,15 @@ public class Lieu extends ListFragment {
         private Context context;
         private ListFragment lFragment;
 
-        private WeakReference<Lieu> fragmentWeakRef;
+        private WeakReference<FragmentType> fragmentWeakRef;
 
         /**
          * Et oui, il y a un constructeur...
          *
          * @param fragment
          */
-        private QueryForLieuTask(Lieu fragment) {
-            this.fragmentWeakRef = new WeakReference<Lieu>(fragment);
+        private QueryForTypeTask(FragmentType fragment) {
+            this.fragmentWeakRef = new WeakReference<FragmentType>(fragment);
         }
 
         protected ArrayList<String> doInBackground(Object... o) {
@@ -185,10 +185,10 @@ public class Lieu extends ListFragment {
             this.act = this.lFragment.getActivity();
             this.context = this.lFragment.getActivity().getApplicationContext();
 
-            ArrayList<String> listeLieu = this.parseJSON(this.startQuerying());
+            ArrayList<String> listeType = this.parseJSON(this.startQuerying());
 
 
-            return listeLieu;
+            return listeType;
 
         }
 
@@ -202,7 +202,7 @@ public class Lieu extends ListFragment {
             from += "=" + sdf.format(new java.util.Date());
 
             String url = this.act.getResources().getString(
-                    R.string.api_lieux_json);
+                    R.string.api_types_json);
 
 
             JSONObject jo = jr.getJSONFromUrl(url + "?" + from);
@@ -217,7 +217,7 @@ public class Lieu extends ListFragment {
             ArrayList<String> l = new ArrayList<String>();
 
             try {
-                JSONArray array = jsonObject.getJSONArray("lieux");
+                JSONArray array = jsonObject.getJSONArray("types");
 
                 if (array != null) {
 
@@ -243,18 +243,18 @@ public class Lieu extends ListFragment {
         //
         // Exécution à la fin du traitement
         //
-        protected void onPostExecute(ArrayList<String> lLieu) {
+        protected void onPostExecute(ArrayList<String> lType) {
 
             // Create items for the ListView
-            LieuAdapter adapter = new LieuAdapter(this.context, R.layout.searchitem_lieu, lLieu, this.act);
+            TypeAdapter adapter = new TypeAdapter(this.context, R.layout.searchitem_type, lType, this.act);
 
             // on change l'affichage
             this.act.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             this.lFragment.getListView().setVisibility(View.VISIBLE);
 
+
             // specify the list adaptor
             this.lFragment.getListView().setAdapter(adapter);
-
 
         }
     } // fin async

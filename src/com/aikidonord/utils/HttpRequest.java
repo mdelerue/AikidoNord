@@ -67,11 +67,10 @@ public class HttpRequest {
     public void abort() {
         try {
             if (httpClient != null) {
-                System.out.println("Abort.");
                 httpPost.abort();
             }
         } catch (Exception e) {
-            System.out.println("AikidoNord" + e);
+            Log.e("Aikido Nord", e.getMessage());
         }
     }
 

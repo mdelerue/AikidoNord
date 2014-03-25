@@ -4,7 +4,7 @@
         android:id="@+id/frags">
     <!-- "Fragment A" -->
 
-    <fragment class="com.aikidonord.fragments.ProchainsStages"
+    <fragment class="com.aikidonord.fragments.FragmentProchainsStages"
               android:id="@+id/fragment_date"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

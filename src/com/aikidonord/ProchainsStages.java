@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import com.aikidonord.fragments.FragmentProchainsStages;
 import com.aikidonord.metier.Stage;
 
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ public class ProchainsStages extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.actionbar_titre_stage));
 
-        com.aikidonord.fragments.ProchainsStages newFragment
-                = new com.aikidonord.fragments.ProchainsStages()
+        FragmentProchainsStages newFragment
+                = new FragmentProchainsStages()
                 .newInstance(getIntent().getExtras());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frags, newFragment).commit();

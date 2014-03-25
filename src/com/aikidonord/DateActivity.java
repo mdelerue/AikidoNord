@@ -22,6 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import com.aikidonord.fragments.FragmentDate;
+import com.aikidonord.fragments.FragmentProchainsStages;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +32,7 @@ import android.support.v7.app.ActionBarActivity;
  * Time: 16:43
  */
 public class DateActivity extends ActionBarActivity
-        implements com.aikidonord.fragments.Date.OnDateSelectedListener {
+        implements FragmentDate.OnDateSelectedListener {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class DateActivity extends ActionBarActivity
 
 
         // gaffe à la bidouille sur le layout classique qui appelle
-        // com.aikidonord.fragments.ProchainsStages
+        // com.aikidonord.fragments.FragmentProchainsStages
         // pour zapper le choix de date
         setContentView(R.layout.activity_date);
 
@@ -56,8 +58,8 @@ public class DateActivity extends ActionBarActivity
     @Override
     public void onDateSelected(String date) {
 
-        com.aikidonord.fragments.ProchainsStages psFragment =
-                (com.aikidonord.fragments.ProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
+        FragmentProchainsStages psFragment =
+                (FragmentProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
 
         if (psFragment != null) {
 

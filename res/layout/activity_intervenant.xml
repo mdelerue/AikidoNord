@@ -2,7 +2,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
     <!-- "Fragment A" -->
-    <fragment class="com.aikidonord.fragments.Intervenant"
+    <fragment class="com.aikidonord.fragments.FragmentIntervenant"
               android:id="@+id/fragment_intervenant"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

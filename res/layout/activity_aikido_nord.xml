@@ -2,7 +2,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
     <!-- "Fragment A" -->
-    <fragment class="com.aikidonord.fragments.Accueil"
+    <fragment class="com.aikidonord.fragments.FragmentAccueil"
               android:id="@+id/fragment_accueil"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

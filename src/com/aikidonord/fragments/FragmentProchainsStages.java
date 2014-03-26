@@ -71,7 +71,7 @@ public class FragmentProchainsStages extends Fragment {
 
         Bundle b = getArguments();
 
-        if (b != null) {
+       if (b != null) {
 
             rlLoading.setVisibility(View.VISIBLE);
             pager.setVisibility(View.GONE);
@@ -156,6 +156,14 @@ public class FragmentProchainsStages extends Fragment {
         this.asyncTaskWeakRef = new WeakReference<QueryForProchainStageTask>(asyncTask);
         asyncTask.execute(this, type, data);
 
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putParcelableArrayList("stages", this.lstage);
+        super.onSaveInstanceState(outState);
 
     }
 

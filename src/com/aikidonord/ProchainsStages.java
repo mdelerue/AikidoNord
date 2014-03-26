@@ -50,11 +50,13 @@ public class ProchainsStages extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.actionbar_titre_stage));
 
+        if (savedInstanceState == null) {
         FragmentProchainsStages newFragment
                 = new FragmentProchainsStages()
                 .newInstance(getIntent().getExtras());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frags, newFragment).commit();
+        }
 
 
 

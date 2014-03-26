@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -51,7 +52,7 @@ public class Lieu extends ActionBarActivity implements FragmentLieu.OnLieuSelect
         FragmentProchainsStages psFragment =
                 (FragmentProchainsStages) getSupportFragmentManager().findFragmentById(R.id.fragment_prochains_stages);
 
-        if (psFragment != null) {
+        if (psFragment != null && psFragment.isLaunched()) {
 
             // bon, on oublie le replace qui ne fonctionne pas
             // si le fragment est dans le layout est on appelle
@@ -60,6 +61,18 @@ public class Lieu extends ActionBarActivity implements FragmentLieu.OnLieuSelect
             psFragment.lancementAsync("lieu", lieu, true);
 
 
+        } else {
+            // à la bascule de tablette vers téléphone et clic, on arrive ici.
+            // Donc on revérifie et on doublonne le code :(
+            // dans le cas de l'affichage téléphone classique
+
+            Intent i = new Intent(this, com.aikidonord.ProchainsStages.class);
+            // données à envoyer à l'activité
+            Bundle b = new Bundle();
+            b.putString("type", "lieu");
+            b.putString("data", String.valueOf(lieu));
+            i.putExtras(b);
+            this.startActivity(i);
         }
 
     }

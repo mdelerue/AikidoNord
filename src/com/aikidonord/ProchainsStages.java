@@ -66,6 +66,7 @@ public class ProchainsStages extends ActionBarActivity {
      * Surcharge de la sauvegarde
      * Sauvegarde le la liste de stage à la destruction
      */
+    /*
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
@@ -74,15 +75,25 @@ public class ProchainsStages extends ActionBarActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    */
     /**
      * surcharge de la restauration
      * restaure la liste de stage et appelle l'affichage
      */
+    /*
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
+        FragmentProchainsStages newFragment
+                = new FragmentProchainsStages();
+                //.newInstance(getIntent().getExtras());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frags, newFragment);
+        ft.commit();
+        //ft.add(R.id.frags, newFragment).commit();
+
         // Restore state members from saved instance
-        ArrayList<Stage> stage = savedInstanceState.getParcelableArrayList("stages");
+        //ArrayList<Stage> stage = savedInstanceState.getParcelableArrayList("stages");
         //this.displayStage(stage);
 
     }
@@ -91,6 +102,8 @@ public class ProchainsStages extends ActionBarActivity {
     public Object onRetainCustomNonConfigurationInstance() {
         return lstage;
     }
+    */
+
 
 
 }

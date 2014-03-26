@@ -57,11 +57,13 @@ public class FragmentProchainsStages extends Fragment {
     protected ViewPager viewPager;
     protected StageAdapter sAdapter;
     protected View rlLoading;
+    private boolean launched = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_prochain_stage, container, false);
+        View view = inflater.inflate(R.layout.fragment_prochain_stage, container, false);
 
+        this.launched = true;
         this.rlLoading = view.findViewById(R.id.loadingPanel);
         View pager = view.findViewById(R.id.pager);
 
@@ -90,11 +92,15 @@ public class FragmentProchainsStages extends Fragment {
         }
 
 
-
         return view;
     }
 
 
+    /**
+     * Crée une instance, ajoute le Bundle et la renvoie
+     * @param b
+     * @return
+     */
     public static FragmentProchainsStages newInstance(Bundle b) {
         FragmentProchainsStages f = new FragmentProchainsStages();
 
@@ -140,8 +146,10 @@ public class FragmentProchainsStages extends Fragment {
         // dans le cas d'un rechargement par un autre fragment
         // on remet le loading...
         if (MAJ) {
-            this.rlLoading.setVisibility(View.VISIBLE);
-            this.viewPager.setVisibility(View.GONE);
+            if (this.rlLoading != null) {
+                this.rlLoading.setVisibility(View.VISIBLE);
+                this.viewPager.setVisibility(View.GONE);
+            }
         }
 
         QueryForProchainStageTask asyncTask = new QueryForProchainStageTask(this);
@@ -149,6 +157,11 @@ public class FragmentProchainsStages extends Fragment {
         asyncTask.execute(this, type, data);
 
 
+    }
+
+
+    public boolean isLaunched() {
+        return this.launched;
     }
 
 
@@ -231,8 +244,6 @@ public class FragmentProchainsStages extends Fragment {
         }
 
     } // fin StageFragment
-
-
 
 
     /**
